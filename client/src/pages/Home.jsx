@@ -845,18 +845,20 @@ export default function Home({ onOpenSearch }) {
                 const isOpen = openFaqId === item.id;
                 return (
                   <div key={item.id} className={`faq-item ${isOpen ? 'open' : ''}`}>
-                    <button 
-                      type="button" 
-                      className="faq-question-btn"
-                      onClick={() => setOpenFaqId(isOpen ? null : item.id)}
-                    >
-                      <span>{item.question}</span>
-                      <div className="faq-icon-bubble">
-                        <ChevronDown size={18} />
+                    <div className="faq-item-inner">
+                      <button 
+                        type="button" 
+                        className="faq-question-btn"
+                        onClick={() => setOpenFaqId(isOpen ? null : item.id)}
+                      >
+                        <span>{item.question}</span>
+                        <div className="faq-icon-bubble">
+                          <ChevronDown size={18} />
+                        </div>
+                      </button>
+                      <div className="faq-answer-wrap">
+                        <p>{item.answer}</p>
                       </div>
-                    </button>
-                    <div className="faq-answer-wrap">
-                      <p>{item.answer}</p>
                     </div>
                   </div>
                 );
