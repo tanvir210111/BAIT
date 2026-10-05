@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, Lock, ArrowRight, AlertCircle, Shield, GraduationCap, BookOpen } from 'lucide-react';
+import { User, Lock, ArrowRight, AlertCircle, GraduationCap, UserPlus } from 'lucide-react';
 
 export default function SignIn() {
   const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ export default function SignIn() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!username.trim() || !password.trim()) {
-      setError('ইউজারনেম / ই-মেইল এবং পাসওয়ার্ড প্রদান করুন।');
+      setError('ই-মেইল / মোবাইল নম্বর এবং পাসওয়ার্ড প্রদান করুন।');
       return;
     }
 
@@ -30,12 +30,7 @@ export default function SignIn() {
       if (res.ok && data.token) {
         localStorage.setItem('bait_admin_token', data.token);
         localStorage.setItem('bait_admin_user', JSON.stringify(data.user));
-
-        if (data.user.category === 'admin' || data.user.role === 'superadmin') {
-          navigate('/admin');
-        } else {
-          navigate('/my-profile');
-        }
+        navigate('/my-profile');
       } else {
         setError(data.error || 'ভুল তথ্য প্রদান করা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
       }
@@ -55,34 +50,36 @@ export default function SignIn() {
 
   return (
     <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px', background: '#f8fafc' }}>
-      <div style={{ width: '100%', maxWidth: '460px', background: '#fff', border: '1px solid var(--border)', borderRadius: '14px', padding: '36px', boxShadow: 'var(--shadow-lg)' }}>
+      <div style={{ width: '100%', maxWidth: '460px', background: '#fff', border: '1px solid var(--border)', borderRadius: '16px', padding: '36px', boxShadow: 'var(--shadow-md)' }}>
+        
+        {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-          <div className="logo-badge" style={{ margin: '0 auto 14px auto', width: '54px', height: '54px', fontSize: '1.3rem' }}>
+          <div className="logo-badge" style={{ margin: '0 auto 14px auto', width: '52px', height: '52px', fontSize: '1.25rem' }}>
             BAIT
           </div>
           <h1 style={{ fontSize: '1.6rem', color: 'var(--primary-dark)', marginBottom: '6px' }}>
-            প্রোফাইল সাইন ইন
+            শিক্ষার্থী লগইন
           </h1>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.92rem' }}>
-            আপনার BAIT প্রোফাইল, কোর্স ও ড্যাশবোর্ডে প্রবেশ করুন
+            আপনার শিক্ষার্থী প্রোফাইল ও কোর্সের তথ্যে প্রবেশ করুন
           </p>
         </div>
 
         {error && (
           <div style={{ background: '#fee2e2', color: '#991b1b', border: '1px solid #fecaca', padding: '12px 14px', borderRadius: '8px', marginBottom: '20px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <AlertCircle size={18} />
+            <AlertCircle size={18} style={{ flexShrink: 0 }} />
             <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label className="form-label">ইউজারনেম / ই-মেইল ঠিকানা</label>
+            <label className="form-label">ই-মেইল অথবা মোবাইল নম্বর</label>
             <div style={{ position: 'relative' }}>
               <input 
                 type="text"
                 className="form-control"
-                placeholder="যেমন: admin অথবা rahim.ahmed@bait.org.bd"
+                placeholder="যেমন: tanvir.kapasia@gmail.com বা ০১৭১..."
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 required
@@ -111,49 +108,61 @@ export default function SignIn() {
           {/* Quick Demo Access Helpers */}
           <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '8px', border: '1px solid var(--border)', marginBottom: '22px' }}>
             <div style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', marginBottom: '8px' }}>
-              সহজে টেস্ট করার ডেমো অ্যাকাউন্টসমূহ (ক্লিক করুন):
+              টেস্ট ডেমো শিক্ষার্থী লগইন (ক্লিক করুন):
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <button 
-                type="button" 
-                onClick={() => handleQuickFill('admin', 'bait@2026')}
-                style={{ textAlign: 'left', background: '#fff', border: '1px solid var(--border)', padding: '6px 10px', borderRadius: '4px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
-              >
-                <Shield size={14} color="var(--primary)" />
-                <strong>প্রধান প্রশাসক (Admin)</strong> - <code>admin</code>
-              </button>
-              <button 
-                type="button" 
-                onClick={() => handleQuickFill('rahim.ahmed@bait.org.bd', 'bait@2026')}
-                style={{ textAlign: 'left', background: '#fff', border: '1px solid var(--border)', padding: '6px 10px', borderRadius: '4px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
-              >
-                <BookOpen size={14} color="var(--accent)" />
-                <strong>প্রশিক্ষক প্রোফাইল</strong> - <code>মোঃ আব্দুর রহিম</code>
-              </button>
-              <button 
-                type="button" 
-                onClick={() => handleQuickFill('tanvir.kapasia@gmail.com', 'bait@2026')}
-                style={{ textAlign: 'left', background: '#fff', border: '1px solid var(--border)', padding: '6px 10px', borderRadius: '4px', fontSize: '0.82rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
-              >
-                <GraduationCap size={14} color="var(--accent-emerald)" />
-                <strong>শিক্ষার্থী প্রোফাইল</strong> - <code>তানভীর হোসেন</code>
-              </button>
-            </div>
+            <button 
+              type="button" 
+              onClick={() => handleQuickFill('tanvir.kapasia@gmail.com', 'bait@2026')}
+              style={{ width: '100%', textAlign: 'left', background: '#fff', border: '1px solid var(--border)', padding: '8px 12px', borderRadius: '6px', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <GraduationCap size={16} color="var(--primary)" />
+              <div>
+                <strong>শিক্ষার্থী:</strong> তানভীর হোসেন (<code>tanvir.kapasia@gmail.com</code>)
+              </div>
+            </button>
           </div>
 
           <button 
             type="submit" 
             className="btn btn-primary"
             disabled={loading}
-            style={{ width: '100%', height: '46px' }}
+            style={{ width: '100%', height: '46px', fontSize: '1rem', fontWeight: 600 }}
           >
-            <span>{loading ? 'যাচাই করা হচ্ছে...' : 'সাইন ইন করুন'}</span>
+            <span>{loading ? 'যাচাই করা হচ্ছে...' : 'লগইন করুন'}</span>
             <ArrowRight size={16} />
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: '24px' }}>
-          <Link to="/" style={{ color: 'var(--primary)', fontSize: '0.9rem', fontWeight: 600 }}>
+        {/* Link to Student Registration Panel */}
+        <div style={{ textAlign: 'center', marginTop: '24px', paddingTop: '20px', borderTop: '1px solid var(--border)', background: 'rgba(0, 106, 78, 0.04)', borderRadius: '12px', padding: '18px 16px' }}>
+          <div style={{ color: 'var(--text-muted)', fontSize: '0.92rem', marginBottom: '10px' }}>
+            আপনার কি শিক্ষার্থী অ্যাকাউন্ট নেই?
+          </div>
+          <Link 
+            to="/signup" 
+            style={{ 
+              color: '#ffffff', 
+              background: 'var(--accent-red)', 
+              fontWeight: 700, 
+              textDecoration: 'none', 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              gap: '8px',
+              padding: '10px 22px',
+              borderRadius: 'var(--radius-md)',
+              fontSize: '0.95rem',
+              boxShadow: '0 3px 12px rgba(244, 42, 65, 0.35)',
+              transition: 'var(--transition)'
+            }}
+          >
+            <UserPlus size={17} />
+            <span>নতুন শিক্ষার্থী নিবন্ধন করুন</span>
+          </Link>
+        </div>
+
+        <div style={{ textAlign: 'center', marginTop: '16px' }}>
+          <Link to="/" style={{ color: 'var(--text-muted)', fontSize: '0.86rem' }}>
             ← হোমপেজে ফিরে যান
           </Link>
         </div>

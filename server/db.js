@@ -119,6 +119,12 @@ function initSchema() {
       value TEXT
     );
   `);
+
+  try {
+    db.exec('ALTER TABLE people ADD COLUMN password_hash TEXT;');
+  } catch (e) {
+    // Column already exists, ignore
+  }
 }
 
 initSchema();

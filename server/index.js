@@ -442,38 +442,114 @@ app.get('/api/settings', (req, res) => {
 // ADMIN AUTH & MANAGEMENT APIS
 // -------------------------------------------------------------
 
-// Universal Auth Login (Admin & People: Instructor, Student, Journalist, Employee)
+// Student Registration API
+app.post('/api/auth/register', (req, res) => {
+  try {
+    const { 
+      name_bn, email, phone, password, course_name, 
+      division_id, district_id, upazila_id, education, bio 
+    } = req.body;
+
+    if (!name_bn || !password || (!email && !phone)) {
+      return res.status(400).json({ error: 'নাম, পাসওয়ার্ড এবং ইমেইল অথবা মোবাইল নম্বর প্রদান করা আবশ্যক।' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ error: 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।' });
+    }
+
+    // Check if email or phone already registered
+    const existing = db.prepare(`
+      SELECT id FROM people 
+      WHERE (email = ? AND email != '') OR (phone = ? AND phone != '')
+    `).get(email || '', phone || '');
+
+    if (existing) {
+      return res.status(400).json({ error: 'এই ই-মেইল অথবা মোবাইল নম্বর দিয়ে ইতিমধ্যে অ্যাকাউন্ট খোলা হয়েছে।' });
+    }
+
+    const password_hash = bcrypt.hashSync(password, 10);
+    const slug = 'student-' + Date.now().toString().slice(-6) + '-' + Math.floor(Math.random() * 1000);
+
+    const result = db.prepare(`
+      INSERT INTO people (
+        category, name_bn, slug, designation, photo_url,
+        phone, email, bio, division_id, district_id, upazila_id,
+        education, course_name, batch, achievements, password_hash
+      ) VALUES (
+        'student', ?, ?, 'প্রশিক্ষণার্থী', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+        ?, ?, ?, ?, ?, ?,
+        ?, ?, 'ব্যাচ-০১ (২০২৬)', 'কোর্স সফলভাবে চলমান', ?
+      )
+    `).run(
+      name_bn,
+      slug,
+      phone || '',
+      email || '',
+      bio || 'BAIT-এর প্রশিক্ষণার্থী শিক্ষার্থী।',
+      division_id ? parseInt(division_id) : null,
+      district_id ? parseInt(district_id) : null,
+      upazila_id ? parseInt(upazila_id) : null,
+      education || '',
+      course_name || 'তথ্য ও যোগাযোগ প্রযুক্তি প্রশিক্ষণ',
+      password_hash
+    );
+
+    const newId = result.lastInsertRowid;
+
+    // Fetch newly created person with location names
+    const newStudent = db.prepare(`
+      SELECT p.*,
+        div.name_bn as division_name, dist.name_bn as district_name, u.name_bn as upazila_name
+      FROM people p
+      LEFT JOIN divisions div ON p.division_id = div.id
+      LEFT JOIN districts dist ON p.district_id = dist.id
+      LEFT JOIN upazilas u ON p.upazila_id = u.id
+      WHERE p.id = ?
+    `).get(newId);
+
+    const token = jwt.sign(
+      { id: newStudent.id, name: newStudent.name_bn, role: 'student', category: 'student', slug: newStudent.slug, email: newStudent.email },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.status(201).json({
+      success: true,
+      message: 'অভিনন্দন! আপনার শিক্ষার্থী অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।',
+      token,
+      user: {
+        id: newStudent.id,
+        name: newStudent.name_bn,
+        role: 'student',
+        category: 'student',
+        slug: newStudent.slug,
+        email: newStudent.email,
+        phone: newStudent.phone,
+        photo_url: newStudent.photo_url,
+        designation: newStudent.designation,
+        course_name: newStudent.course_name,
+        batch: newStudent.batch,
+        division_name: newStudent.division_name,
+        district_name: newStudent.district_name,
+        upazila_name: newStudent.upazila_name
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'নিবন্ধন সম্পন্ন করতে সমস্যা হয়েছে: ' + err.message });
+  }
+});
+
+// Student & User Auth Login
 app.post('/api/auth/login', (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res.status(400).json({ error: 'ইউজারনেম / ই-মেইল এবং পাসওয়ার্ড প্রদান করুন।' });
+      return res.status(400).json({ error: 'ই-মেইল / মোবাইল নম্বর এবং পাসওয়ার্ড প্রদান করুন।' });
     }
 
-    // 1. Check Admin
-    const adminUser = db.prepare('SELECT * FROM users_admin WHERE username = ?').get(username);
-    if (adminUser) {
-      const isMatch = bcrypt.compareSync(password, adminUser.password_hash);
-      if (isMatch) {
-        const token = jwt.sign(
-          { id: adminUser.id, username: adminUser.username, role: adminUser.role, name: adminUser.name, category: 'admin' },
-          JWT_SECRET,
-          { expiresIn: '7d' }
-        );
-        return res.json({
-          token,
-          user: {
-            id: adminUser.id,
-            username: adminUser.username,
-            name: adminUser.name,
-            role: adminUser.role,
-            category: 'admin'
-          }
-        });
-      }
-    }
-
-    // 2. Check People (Instructors, Students, Journalists, Employees)
+    // Find person by email, phone, or slug
     const person = db.prepare(`
       SELECT p.*,
         div.name_bn as division_name, dist.name_bn as district_name, u.name_bn as upazila_name
@@ -481,19 +557,26 @@ app.post('/api/auth/login', (req, res) => {
       LEFT JOIN divisions div ON p.division_id = div.id
       LEFT JOIN districts dist ON p.district_id = dist.id
       LEFT JOIN upazilas u ON p.upazila_id = u.id
-      WHERE p.email = ? OR p.slug = ? OR p.phone = ?
+      WHERE p.email = ? OR p.phone = ? OR p.slug = ?
     `).get(username, username, username);
 
     if (person) {
-      // Default common password or specific
-      const validPassword = password === 'bait@2026' || password === '123456';
-      if (validPassword) {
+      let isMatch = false;
+      if (person.password_hash) {
+        isMatch = bcrypt.compareSync(password, person.password_hash);
+      } else {
+        // Fallback for seeded users
+        isMatch = password === 'bait@2026' || password === '123456';
+      }
+
+      if (isMatch) {
         const token = jwt.sign(
           { id: person.id, name: person.name_bn, role: person.category, category: person.category, slug: person.slug, email: person.email },
           JWT_SECRET,
           { expiresIn: '7d' }
         );
         return res.json({
+          success: true,
           token,
           user: {
             id: person.id,
@@ -502,8 +585,11 @@ app.post('/api/auth/login', (req, res) => {
             category: person.category,
             slug: person.slug,
             email: person.email,
+            phone: person.phone,
             photo_url: person.photo_url,
             designation: person.designation,
+            course_name: person.course_name,
+            batch: person.batch,
             division_name: person.division_name,
             district_name: person.district_name,
             upazila_name: person.upazila_name
@@ -512,7 +598,7 @@ app.post('/api/auth/login', (req, res) => {
       }
     }
 
-    return res.status(401).json({ error: 'ভুল ইউজারনেম / ই-মেইল বা পাসওয়ার্ড।' });
+    return res.status(401).json({ error: 'ভুল ই-মেইল / মোবাইল নম্বর বা পাসওয়ার্ড।' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

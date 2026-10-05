@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, AlertCircle } from 'lucide-react';
+import { contactAPI } from '../services/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -24,21 +25,12 @@ export default function Contact() {
     setStatusMsg(null);
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setStatusMsg({ type: 'success', text: data.message || 'আপনার বার্তাটি সফলভাবে পৌঁছানো হয়েছে। ধন্যবাদ!' });
-        setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
-      } else {
-        setStatusMsg({ type: 'error', text: data.error || 'বার্তা পাঠানো সম্ভব হয়নি। পুনরায় চেষ্টা করুন।' });
-      }
+      const data = await contactAPI.sendMessage(formData);
+      setStatusMsg({ type: 'success', text: data?.message || 'আপনার বার্তাটি সফলভাবে পৌঁছানো হয়েছে। ধন্যবাদ!' });
+      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
     } catch (err) {
       console.error(err);
-      setStatusMsg({ type: 'error', text: 'সার্ভারের সাথে যোগাযোগে সমস্যা হয়েছে।' });
+      setStatusMsg({ type: 'error', text: err.message || 'সার্ভারের সাথে যোগাযোগে সমস্যা হয়েছে।' });
     } finally {
       setSubmitting(false);
     }
@@ -173,15 +165,15 @@ export default function Contact() {
                   <MapPin size={20} color="var(--primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
                   <div>
                     <strong>ঠিকানা:</strong><br />
-                    BAIT টাওয়ার, প্লট-৭/এ, মিরপুর-১০, ঢাকা-১২১৬, বাংলাদেশ
+                    ৩১/১ শরীফ কমপ্লেক্স, দৈনিক বাংলার আলো নিউজ পত্রিকা অফিস, ৬ষ্ঠ তলা, পুরানা পল্টন, ঢাকা।
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <Phone size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
                   <div>
-                    <strong>ফোন নম্বর:</strong><br />
-                    +৮৮০ ২-৯৮৭৬৫৪৩, +৮৮০ ১৭০০ ০০১১২২
+                    <strong>হটলাইন নম্বর:</strong><br />
+                    <a href="tel:01711006214" style={{ color: 'var(--primary)', fontWeight: 700, textDecoration: 'none' }}>01711006214</a>
                   </div>
                 </div>
 
@@ -189,16 +181,16 @@ export default function Contact() {
                   <Mail size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
                   <div>
                     <strong>অফিসিয়াল ই-মেইল:</strong><br />
-                    info@bait.org.bd, support@bait.org.bd
+                    <a href="mailto:supportbait@gmail.com" style={{ color: 'var(--primary)', textDecoration: 'none' }}>supportbait@gmail.com</a>
                   </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <Clock size={20} color="var(--primary)" style={{ flexShrink: 0 }} />
                   <div>
-                    <strong>অফিস সময়:</strong><br />
-                    রবিবার হতে বৃহস্পতিবার: সকাল ৯:০০ টা – বিকাল ৫:০০ টা<br />
-                    <span style={{ fontSize: '0.85rem', color: '#64748b' }}>(শুক্রবার ও শনিবার সাপ্তাহিক বন্ধ)</span>
+                    <strong>অফিস ও কাউন্সেলিং সময়:</strong><br />
+                    শনিবার হতে বৃহস্পতিবার: দুপুর ১২:০০ টা – রাত ৮:০০ টা<br />
+                    <span style={{ fontSize: '0.85rem', color: '#64748b' }}>(শুক্রবার সাপ্তাহিক বন্ধ)</span>
                   </div>
                 </div>
               </div>
@@ -207,7 +199,7 @@ export default function Contact() {
               <div style={{ marginTop: '24px', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--border)' }}>
                 <iframe 
                   title="BAIT সদর দপ্তর অবস্থান মানচিত্র"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14602.700319752535!2d90.3654215!3d23.8052445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d33532b3fb%3A0x2b35ef50567a572a!2sMirpur%2010%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.3789429737035!2d90.4124976!3d23.7338574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b85be256e0c7%3A0x6335a90715cf4a18!2sPurana%20Paltan%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
                   width="100%" 
                   height="220" 
                   style={{ border: 0, display: 'block' }} 

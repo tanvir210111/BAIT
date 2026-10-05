@@ -4,6 +4,7 @@ import {
   User, Mail, Phone, MapPin, Briefcase, GraduationCap, 
   Award, BookOpen, Calendar, ArrowLeft, CheckCircle2, Newspaper, Building2 
 } from 'lucide-react';
+import { peopleAPI } from '../services/api';
 
 export default function PersonProfile({ category }) {
   const { slug } = useParams();
@@ -15,8 +16,7 @@ export default function PersonProfile({ category }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/people/${apiCategory}/${slug}`)
-      .then(res => res.json())
+    peopleAPI.getProfile(apiCategory, slug)
       .then(resData => {
         setData(resData);
         setLoading(false);
@@ -94,17 +94,17 @@ export default function PersonProfile({ category }) {
               </div>
               {person.division_name && (
                 <div style={{ fontSize: '0.88rem', marginBottom: '4px' }}>
-                  <strong>বিভাগ:</strong> <Link to={`/bibhag/${person.division_slug}`} style={{ color: 'var(--primary)' }}>{person.division_name}</Link>
+                  <strong>বিভাগ:</strong> <span style={{ color: 'var(--primary)', fontWeight: 600 }}>{person.division_name}</span>
                 </div>
               )}
               {person.district_name && (
                 <div style={{ fontSize: '0.88rem', marginBottom: '4px' }}>
-                  <strong>জেলা:</strong> <Link to={`/jela/${person.district_slug}`} style={{ color: 'var(--primary)' }}>{person.district_name}</Link>
+                  <strong>জেলা:</strong> <span style={{ color: 'var(--primary)', fontWeight: 600 }}>{person.district_name}</span>
                 </div>
               )}
               {person.upazila_name && (
                 <div style={{ fontSize: '0.88rem' }}>
-                  <strong>উপজেলা:</strong> <Link to={`/upojela/${person.upazila_slug}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>{person.upazila_name}</Link>
+                  <strong>উপজেলা:</strong> <span style={{ color: 'var(--primary)', fontWeight: 700 }}>{person.upazila_name}</span>
                 </div>
               )}
             </div>

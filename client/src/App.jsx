@@ -22,12 +22,6 @@ function ScrollToTop() {
 // Public Pages
 import Home from './pages/Home';
 import About from './pages/About';
-import DivisionList from './pages/DivisionList';
-import DivisionDetails from './pages/DivisionDetails';
-import DistrictList from './pages/DistrictList';
-import DistrictDetails from './pages/DistrictDetails';
-import UpazilaList from './pages/UpazilaList';
-import UpazilaDetails from './pages/UpazilaDetails';
 import CourseList from './pages/CourseList';
 import CourseDetails from './pages/CourseDetails';
 import InstructorsDirectory from './pages/InstructorsDirectory';
@@ -35,41 +29,25 @@ import StudentsDirectory from './pages/StudentsDirectory';
 import JournalistsDirectory from './pages/JournalistsDirectory';
 import PersonProfile from './pages/PersonProfile';
 import Contact from './pages/Contact';
+import PolicyPage from './pages/PolicyPage';
 
 // Profile & Auth Pages
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import MyProfile from './pages/MyProfile';
-
-// Admin Pages
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminDashboard from './pages/admin/AdminDashboard';
 
 function AppLayout() {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
-  const location = useLocation();
-
-  // Hide public header/footer on admin dashboard (keep on admin/login if needed or clean)
-  const isAdminDashboard = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {!isAdminDashboard && (
-        <Header onOpenSearch={() => setSearchModalOpen(true)} />
-      )}
+      <Header onOpenSearch={() => setSearchModalOpen(true)} />
 
       <main style={{ flexGrow: 1 }}>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home onOpenSearch={() => setSearchModalOpen(true)} />} />
           <Route path="/amader-somporke" element={<About />} />
-          
-          {/* Administrative Hierarchy Pages */}
-          <Route path="/bibhag" element={<DivisionList />} />
-          <Route path="/bibhag/:slug" element={<DivisionDetails />} />
-          <Route path="/jela" element={<DistrictList />} />
-          <Route path="/jela/:slug" element={<DistrictDetails />} />
-          <Route path="/upojela" element={<UpazilaList />} />
-          <Route path="/upojela/:slug" element={<UpazilaDetails />} />
 
           {/* Courses */}
           <Route path="/course" element={<CourseList />} />
@@ -90,14 +68,17 @@ function AppLayout() {
           {/* Contact */}
           <Route path="/jogajog" element={<Contact />} />
 
+          {/* Policies & Terms */}
+          <Route path="/refund-policy" element={<PolicyPage type="refund" />} />
+          <Route path="/privacy-policy" element={<PolicyPage type="privacy" />} />
+          <Route path="/terms-conditions" element={<PolicyPage type="terms" />} />
+
           {/* Profile & Auth */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/login" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/register" element={<SignUp />} />
           <Route path="/my-profile" element={<MyProfile />} />
-
-          {/* Admin Panel */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
 
           {/* Fallback */}
           <Route path="*" element={
@@ -112,7 +93,7 @@ function AppLayout() {
         </Routes>
       </main>
 
-      {!isAdminDashboard && <Footer />}
+      <Footer />
 
       {/* Global Search Modal */}
       <SearchModal 

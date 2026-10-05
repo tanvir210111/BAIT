@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BookOpen, Clock, Calendar, MapPin, UserCheck, ArrowRight } from 'lucide-react';
+import { coursesAPI } from '../services/api';
 
 export default function CourseList() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/courses')
-      .then(res => res.json())
+    coursesAPI.getAll()
       .then(data => {
-        setCourses(data);
+        setCourses(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(err => {

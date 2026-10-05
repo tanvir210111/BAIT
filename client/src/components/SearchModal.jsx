@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, X, MapPin, User, BookOpen, Building, ArrowRight, Loader } from 'lucide-react';
+import { searchAPI } from '../services/api';
 
 export default function SearchModal({ isOpen, onClose }) {
   const [query, setQuery] = useState('');
@@ -30,8 +31,7 @@ export default function SearchModal({ isOpen, onClose }) {
 
     const timer = setTimeout(() => {
       setLoading(true);
-      fetch(`/api/search?q=${encodeURIComponent(query.trim())}`)
-        .then(res => res.json())
+      searchAPI.search(query)
         .then(data => {
           setResults(data);
           setLoading(false);
@@ -57,9 +57,6 @@ export default function SearchModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const hasAnyResults = results && (
-    results.divisions?.length > 0 ||
-    results.districts?.length > 0 ||
-    results.upazilas?.length > 0 ||
     results.people?.length > 0 ||
     results.courses?.length > 0
   );
@@ -74,7 +71,7 @@ export default function SearchModal({ isOpen, onClose }) {
             ref={inputRef}
             type="text"
             className="search-main-input"
-            placeholder="বিভাগ, জেলা, উপজেলা (যেমন: কাপাসিয়া), ব্যক্তি বা কোর্স খুঁজুন..."
+            placeholder="কোর্স, প্রশিক্ষক, শিক্ষার্থী বা কর্মকর্তা খুঁজুন..."
             value={query}
             onChange={e => setQuery(e.target.value)}
           />
@@ -94,17 +91,17 @@ export default function SearchModal({ isOpen, onClose }) {
             <div style={{ textAlign: 'center', padding: '30px 20px', color: '#94a3b8' }}>
               <p style={{ fontSize: '1rem', marginBottom: '8px' }}>অনুসন্ধান করতে বাংলা বা ইংরেজিতে টাইপ করুন</p>
               <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <span onClick={() => setQuery('কাপাসিয়া')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
-                  কাপাসিয়া
+                <span onClick={() => setQuery('ওয়েব ڈویلপমেন্ট')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
+                  ওয়েব ডেভেলপমেন্ট
                 </span>
-                <span onClick={() => setQuery('ঢাকা')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
-                  ঢাকা
+                <span onClick={() => setQuery('গ্রাফিক')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
+                  গ্রাফিক ডিজাইন
                 </span>
-                <span onClick={() => setQuery('গাজীপুর')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
-                  গাজীপুর
+                <span onClick={() => setQuery('প্রশিক্ষক')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
+                  প্রশিক্ষক
                 </span>
-                <span onClick={() => setQuery('ওয়েব ڈویلپমেন্ট')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
-                  ওয়েব ڈویلপমেন্ট
+                <span onClick={() => setQuery('পাইথন')} style={{ cursor: 'pointer', background: '#e2e8f0', padding: '4px 10px', borderRadius: '4px', fontSize: '0.82rem', color: '#334155' }}>
+                  পাইথন
                 </span>
               </div>
             </div>
@@ -113,75 +110,6 @@ export default function SearchModal({ isOpen, onClose }) {
           {query.trim() && !loading && results && !hasAnyResults && (
             <div style={{ textAlign: 'center', padding: '30px 20px', color: '#64748b' }}>
               <p>"{query}" সম্পর্কিত কোনো তথ্য পাওয়া যায়নি।</p>
-            </div>
-          )}
-
-          {/* Upazilas Results */}
-          {results?.upazilas?.length > 0 && (
-            <div>
-              <div className="search-group-title">উপজেলা</div>
-              {results.upazilas.map(u => (
-                <Link 
-                  key={u.id} 
-                  to={`/upojela/${u.slug}`} 
-                  onClick={onClose}
-                  className="search-result-item"
-                >
-                  <div>
-                    <strong style={{ color: 'var(--primary-dark)', fontSize: '1.05rem' }}>{u.name_bn} উপজেলা</strong>
-                    <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
-                      জেলা: {u.district_name} | বিভাগ: {u.division_name}
-                    </div>
-                  </div>
-                  <ArrowRight size={16} color="var(--primary)" />
-                </Link>
-              ))}
-            </div>
-          )}
-
-          {/* Districts Results */}
-          {results?.districts?.length > 0 && (
-            <div>
-              <div className="search-group-title">জেলা</div>
-              {results.districts.map(d => (
-                <Link 
-                  key={d.id} 
-                  to={`/jela/${d.slug}`} 
-                  onClick={onClose}
-                  className="search-result-item"
-                >
-                  <div>
-                    <strong style={{ color: 'var(--primary-dark)', fontSize: '1.05rem' }}>{d.name_bn} জেলা</strong>
-                    <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
-                      বিভাগ: {d.division_name}
-                    </div>
-                  </div>
-                  <ArrowRight size={16} color="var(--primary)" />
-                </Link>
-              ))}
-            </div>
-          )}
-
-          {/* Divisions Results */}
-          {results?.divisions?.length > 0 && (
-            <div>
-              <div className="search-group-title">বিভাগ</div>
-              {results.divisions.map(div => (
-                <Link 
-                  key={div.id} 
-                  to={`/bibhag/${div.slug}`} 
-                  onClick={onClose}
-                  className="search-result-item"
-                >
-                  <div>
-                    <strong style={{ color: 'var(--primary-dark)', fontSize: '1.05rem' }}>{div.name_bn}</strong>
-                    <div style={{ fontSize: '0.82rem', color: '#64748b' }}>
-                      {div.description?.substring(0, 70)}...
-                    </div>
-                  </div>
-                  <ArrowRight size={16} color="var(--primary)" />
-                </Link>
-              ))}
             </div>
           )}
 

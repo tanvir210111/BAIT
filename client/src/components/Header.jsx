@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, Menu, X, User, LogOut, ChevronDown, LayoutDashboard, Shield } from 'lucide-react';
+import { Search, Menu, X, User, LogOut, ChevronDown, UserPlus } from 'lucide-react';
 
 export default function Header({ onOpenSearch }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,20 +49,6 @@ export default function Header({ onOpenSearch }) {
 
   return (
     <header className="site-header">
-      {/* Top Notice Bar */}
-      <div className="top-bar">
-        <div className="container top-bar-inner">
-          <div>
-            <span>বাংলাদেশ অ্যাডভান্সড ইনস্টিটিউট অব টেকনোলজি (BAIT) — তৃণমূল পর্যায়ে জ্ঞান ও দক্ষতার বিকাশ</span>
-          </div>
-          <div className="top-bar-links">
-            <span>হটলাইন: +৮৮০ ১৭০০ ০০১১২২</span>
-            <span>|</span>
-            <Link to="/jogajog" style={{ color: '#a7f3d0' }}>সহায়তা কেন্দ্র</Link>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navbar */}
       <div className="container nav-container">
         {/* Brand Logo */}
@@ -70,7 +56,7 @@ export default function Header({ onOpenSearch }) {
           <div className="logo-badge">BAIT</div>
           <div className="brand-names">
             <span className="brand-title">BAIT</span>
-            <span className="brand-subtitle">বাংলাদেশ অ্যাডভান্সড ইনস্টিটিউট</span>
+            <span className="brand-subtitle">বাংলার আলো আইটি</span>
           </div>
         </Link>
 
@@ -79,17 +65,27 @@ export default function Header({ onOpenSearch }) {
           <ul className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
             <li className="nav-item">
               <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
-                হোম
+                <span className="nav-link-inner">হোম</span>
               </Link>
             </li>
             <li className="nav-item">
               <Link to="/amader-somporke" className={`nav-link ${location.pathname === '/amader-somporke' ? 'active' : ''}`}>
-                আমাদের সম্পর্কে
+                <span className="nav-link-inner">আমাদের সম্পর্কে</span>
               </Link>
             </li>
             <li className="nav-item">
+              <Link to="/course" className={`nav-link ${location.pathname === '/course' ? 'active' : ''}`}>
+                <span className="nav-link-inner">আমাদের কোর্সসমূহ</span>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/#services" className="nav-link">
+                <span className="nav-link-inner">আমাদের সেবাসমূহ</span>
+              </a>
+            </li>
+            <li className="nav-item">
               <Link to="/jogajog" className={`nav-link ${location.pathname === '/jogajog' ? 'active' : ''}`}>
-                যোগাযোগ
+                <span className="nav-link-inner">যোগাযোগ</span>
               </Link>
             </li>
           </ul>
@@ -103,8 +99,10 @@ export default function Header({ onOpenSearch }) {
             onClick={onOpenSearch}
             title="গ্লোবাল সার্চ"
           >
-            <Search size={16} />
-            <span>অনুসন্ধান</span>
+            <span className="search-inner">
+              <Search size={16} />
+              <span>অনুসন্ধান</span>
+            </span>
           </button>
 
           {/* Profile / Sign In Option */}
@@ -142,19 +140,6 @@ export default function Header({ onOpenSearch }) {
                       </Link>
                     </li>
 
-                    {(currentUser.role === 'superadmin' || currentUser.category === 'admin') && (
-                      <li>
-                        <Link 
-                          to="/admin" 
-                          className="dropdown-item"
-                          onClick={() => setUserDropdownOpen(false)}
-                        >
-                          <LayoutDashboard size={15} style={{ marginRight: '8px' }} />
-                          <span>নিয়ন্ত্রণ প্যানেল</span>
-                        </Link>
-                      </li>
-                    )}
-
                     <li style={{ borderTop: '1px solid var(--border)', marginTop: '4px', paddingTop: '4px' }}>
                       <button
                         type="button"
@@ -171,9 +156,15 @@ export default function Header({ onOpenSearch }) {
               )}
             </div>
           ) : (
-            <Link to="/signin" className="btn-admin" title="প্রোফাইল সাইন ইন">
-              <User size={16} />
-              <span>সাইন ইন</span>
+            <Link 
+              to="/signin" 
+              className="btn-admin" 
+              title="শিক্ষার্থী সাইন ইন"
+            >
+              <span className="btn-admin-inner">
+                <User size={16} />
+                <span>সাইন ইন</span>
+              </span>
             </Link>
           )}
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BookOpen, Clock, Calendar, MapPin, UserCheck, CheckCircle2, ArrowRight } from 'lucide-react';
+import { coursesAPI } from '../services/api';
 
 export default function CourseDetails() {
   const { slug } = useParams();
@@ -9,8 +10,7 @@ export default function CourseDetails() {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`/api/courses/${slug}`)
-      .then(res => res.json())
+    coursesAPI.getBySlug(slug)
       .then(resData => {
         setData(resData);
         setLoading(false);
@@ -181,9 +181,9 @@ export default function CourseDetails() {
                     <tr>
                       <td>বিভাগ:</td>
                       <td>
-                        <Link to={`/bibhag/${course.division_slug}`} style={{ color: 'var(--primary)', fontWeight: 600 }}>
+                        <span style={{ color: 'var(--primary)', fontWeight: 600 }}>
                           {course.division_name}
-                        </Link>
+                        </span>
                       </td>
                     </tr>
                   )}
@@ -191,9 +191,9 @@ export default function CourseDetails() {
                     <tr>
                       <td>জেলা:</td>
                       <td>
-                        <Link to={`/jela/${course.district_slug}`} style={{ color: 'var(--primary)', fontWeight: 600 }}>
+                        <span style={{ color: 'var(--primary)', fontWeight: 600 }}>
                           {course.district_name}
-                        </Link>
+                        </span>
                       </td>
                     </tr>
                   )}
@@ -201,9 +201,9 @@ export default function CourseDetails() {
                     <tr>
                       <td>উপজেলা:</td>
                       <td>
-                        <Link to={`/upojela/${course.upazila_slug}`} style={{ color: 'var(--primary)', fontWeight: 700 }}>
+                        <span style={{ color: 'var(--primary)', fontWeight: 700 }}>
                           {course.upazila_name}
-                        </Link>
+                        </span>
                       </td>
                     </tr>
                   )}

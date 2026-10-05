@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { User, Mail, Phone, MapPin, Award, BookOpen, LayoutDashboard, LogOut, ArrowRight, ShieldCheck } from 'lucide-react';
+import { User, Mail, Phone, MapPin, Award, BookOpen, LogOut, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);
@@ -45,10 +45,9 @@ export default function MyProfile() {
   if (!user) return null;
 
   const roleTitle = 
-    user.category === 'admin' || user.role === 'superadmin' ? 'প্রধান প্রশাসক (Admin)' :
+    user.category === 'student' ? 'শিক্ষার্থী (Student)' :
     user.category === 'instructor' ? 'কোর্স প্রশিক্ষক' :
-    user.category === 'student' ? 'শিক্ষার্থী' :
-    user.category === 'journalist' ? 'সাংবাদিক প্রতিনিধি' : 'সদর দপ্তর কর্মকর্তা';
+    user.category === 'journalist' ? 'সাংবাদিক প্রতিনিধি' : 'সদস্য / কর্মকর্তা';
 
   return (
     <div>
@@ -121,23 +120,6 @@ export default function MyProfile() {
               </h3>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-                {(user.category === 'admin' || user.role === 'superadmin') && (
-                  <Link 
-                    to="/admin" 
-                    className="standard-card"
-                    style={{ background: '#f8fafc', padding: '18px' }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
-                      <LayoutDashboard size={20} color="var(--primary)" />
-                      <strong style={{ fontSize: '1.05rem', color: 'var(--primary-dark)' }}>অ্যাডমিন নিয়ন্ত্রণ প্যানেল</strong>
-                    </div>
-                    <p style={{ fontSize: '0.86rem', color: '#64748b', marginBottom: '12px' }}>
-                      বিভাগ, জেলা, উপজেলা, ব্যক্তিবর্গ ও কোর্স পরিচালনা করুন।
-                    </p>
-                    <span style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.88rem' }}>প্যানেলে যান →</span>
-                  </Link>
-                )}
-
                 {user.slug && (
                   <Link 
                     to={`/${user.category === 'employee' ? 'employee' : user.category}/${user.slug}`} 
