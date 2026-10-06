@@ -1685,8 +1685,9 @@ img {
   overflow: hidden;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
   z-index: 1;
+  box-sizing: border-box;
 }
 
 .slider-float-btn::before {
@@ -1694,13 +1695,14 @@ img {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 280%;
-  aspect-ratio: 1 / 1;
+  width: max(420px, 320%);
+  height: max(420px, 320%);
   transform: translate(-50%, -50%) rotate(0deg);
   opacity: 0;
   transition: opacity 0.35s ease;
   z-index: 1;
   pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes rotateBorderBeam {
@@ -1713,12 +1715,12 @@ img {
 }
 
 .slider-float-btn:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-5px);
 }
 
 .slider-float-btn:hover::before {
   opacity: 1;
-  animation: rotateBorderBeam 2.5s linear infinite;
+  animation: rotateBorderBeam 2.4s linear infinite;
 }
 
 .slider-float-btn .btn-inner-content {
@@ -1736,12 +1738,13 @@ img {
   height: 100%;
   transition: background 0.3s ease, color 0.3s ease;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 /* Primary Red Button */
 .slider-float-primary {
   background: var(--accent-red);
-  box-shadow: 0 4px 16px rgba(244, 42, 65, 0.4);
+  box-shadow: 0 4px 16px rgba(244, 42, 65, 0.35);
 }
 
 .slider-float-primary .btn-inner-content {
@@ -1753,17 +1756,17 @@ img {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 60deg,
-    #ffffff 120deg,
+    transparent 50deg,
+    #ffffff 110deg,
     #34d399 180deg,
-    #fef08a 240deg,
-    #ffffff 300deg,
+    #fef08a 250deg,
+    #ffffff 310deg,
     transparent 360deg
   );
 }
 
 .slider-float-primary:hover {
-  box-shadow: 0 16px 36px rgba(244, 42, 65, 0.65), 0 0 25px rgba(255, 255, 255, 0.35);
+  box-shadow: 0 14px 32px rgba(244, 42, 65, 0.6), 0 0 22px rgba(255, 255, 255, 0.35);
 }
 
 .slider-float-primary:hover .btn-inner-content {
@@ -1773,7 +1776,7 @@ img {
 /* Green Button Variant */
 .slider-float-green {
   background: var(--primary);
-  box-shadow: 0 4px 16px rgba(0, 106, 78, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 106, 78, 0.3);
 }
 
 .slider-float-green .btn-inner-content {
@@ -1785,17 +1788,17 @@ img {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 60deg,
-    #ffffff 120deg,
+    transparent 50deg,
+    #ffffff 110deg,
     var(--accent-red) 180deg,
-    #34d399 240deg,
-    #ffffff 300deg,
+    #34d399 250deg,
+    #ffffff 310deg,
     transparent 360deg
   );
 }
 
 .slider-float-green:hover {
-  box-shadow: 0 16px 36px rgba(0, 106, 78, 0.55), 0 0 25px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 14px 32px rgba(0, 106, 78, 0.5), 0 0 22px rgba(255, 255, 255, 0.25);
 }
 
 .slider-float-green:hover .btn-inner-content {
@@ -1805,7 +1808,7 @@ img {
 /* Secondary White Button */
 .slider-float-secondary {
   background: #ffffff;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .slider-float-secondary .btn-inner-content {
@@ -1817,17 +1820,17 @@ img {
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
-    transparent 60deg,
-    var(--accent-red) 120deg,
+    transparent 50deg,
+    var(--accent-red) 110deg,
     #006a4e 180deg,
-    #10b981 240deg,
-    var(--accent-red) 300deg,
+    #10b981 250deg,
+    var(--accent-red) 310deg,
     transparent 360deg
   );
 }
 
 .slider-float-secondary:hover {
-  box-shadow: 0 16px 36px rgba(0, 106, 78, 0.45), 0 0 25px rgba(244, 42, 65, 0.35);
+  box-shadow: 0 14px 30px rgba(0, 106, 78, 0.35), 0 0 20px rgba(244, 42, 65, 0.25);
 }
 
 .slider-float-secondary:hover .btn-inner-content {
@@ -4323,8 +4326,9 @@ img {
   background: #FFFFFF;
   border: 1.5px solid #E1ECE6;
   border-radius: 18px;
-  padding: 24px 22px;
+  padding: 22px 20px;
   height: 100%;
+  min-height: 195px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -4495,7 +4499,7 @@ img {
   font-size: 0.93rem;
   color: #5B6D66;
   line-height: 1.6;
-  margin-bottom: 18px;
+  margin-bottom: 0;
   flex-grow: 1;
 }
 
@@ -5021,216 +5025,163 @@ img {
 }
 
 /* --- SECTION 07: OUR TEAM (PREMIUM REDESIGN) --- */
+/* --- SECTION 07: OUR TEAM (REFERENCE REDESIGN - WHITE BG) --- */
 .bait-team-section {
-  background: #F8FAF9;
-  background-image: radial-gradient(ellipse at 50% 0%, rgba(0, 106, 78, 0.06) 0%, transparent 70%);
+  background: #FFFFFF;
   padding: 100px 0;
   border-top: 1px solid #E5ECE9;
   border-bottom: 1px solid #E2EAE7;
   position: relative;
 }
 
-.bait-team-section-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: #E8F5EE;
-  color: #006A4E;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-  border: 1px solid rgba(0, 106, 78, 0.15);
+.bait-team-section .bait-section-editorial-title {
+  color: #003D2E;
 }
 
-.bait-team-section-lead {
-  font-size: 1.08rem;
+.bait-team-section .bait-team-section-lead {
   color: #556660;
-  margin-top: 10px;
+  font-size: 1.05rem;
+  margin-top: 8px;
   line-height: 1.6;
-  max-width: 650px;
 }
 
 .bait-team-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
-  margin-top: 44px;
-  margin-bottom: 44px;
+  margin-top: 48px;
+  margin-bottom: 48px;
 }
 
-/* Premium Card Container */
-.bait-team-profile-item {
+/* Reference Card Styling (White Luxury Card) */
+.bait-team-reference-card {
   background: #FFFFFF;
-  border: 1px solid #E3ECE8;
+  border: 1px solid #E2EAE7;
   border-radius: 20px;
-  padding: 32px 24px 24px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 6px 22px rgba(0, 61, 46, 0.04);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 61, 46, 0.06);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
-.bait-team-card-top-accent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3.5px;
-  background: linear-gradient(90deg, #006A4E 0%, #2B806B 60%, #F42A41 100%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.bait-team-profile-item:hover {
+.bait-team-reference-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(0, 106, 78, 0.28);
-  box-shadow: 0 20px 42px rgba(0, 61, 46, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 106, 78, 0.32);
+  box-shadow: 0 20px 42px rgba(0, 61, 46, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.bait-team-profile-item:hover .bait-team-card-top-accent {
-  opacity: 1;
-}
-
-/* 1. Avatar at Top */
-.bait-team-avatar-center-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.bait-team-avatar-wrapper {
+/* Top Photo */
+.bait-team-card-image-wrap {
   position: relative;
-  display: inline-block;
-  text-decoration: none;
+  width: 100%;
+  height: 340px;
+  background: #F4F8F6;
+  overflow: hidden;
 }
 
-.bait-team-avatar {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
+.bait-team-img-anchor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bait-team-card-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 3.5px solid #FFFFFF;
-  box-shadow: 0 6px 20px rgba(0, 61, 46, 0.12), 0 0 0 2px #E2EAE7;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  object-position: top center;
+  display: block;
+  transform: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bait-team-reference-card:hover .bait-team-card-img {
+  transform: scale(1.03);
+}
+
+/* Accent Line below photo */
+.bait-team-card-accent-line {
+  height: 2.5px;
+  width: 100%;
+  background: linear-gradient(90deg, #006A4E 0%, #00C988 50%, #F42A41 100%);
+}
+
+/* Card Body */
+.bait-team-card-body {
+  padding: 24px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.bait-team-card-name-link {
+  text-decoration: none;
   display: block;
 }
 
-.bait-team-profile-item:hover .bait-team-avatar {
-  transform: scale(1.06);
-  box-shadow: 0 8px 24px rgba(0, 106, 78, 0.2), 0 0 0 2.5px #006A4E;
-}
-
-.bait-team-verified-badge {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: #006A4E;
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #FFFFFF;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-}
-
-/* 2. Name */
-.bait-team-name-link {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-}
-
-.bait-team-name {
+.bait-team-card-name {
+  color: #003D2E;
   font-size: 1.25rem;
   font-weight: 800;
-  color: #003D2E;
   margin: 0 0 6px 0;
   line-height: 1.3;
+  letter-spacing: -0.2px;
   transition: color 0.25s ease;
 }
 
-.bait-team-name-link:hover .bait-team-name {
+.bait-team-card-name-link:hover .bait-team-card-name {
   color: #006A4E;
 }
 
-/* 3. Designation */
-.bait-team-designation-badge {
-  display: inline-block;
-  font-size: 0.82rem;
-  color: #006A4E;
+.bait-team-card-role {
+  color: #F42A41;
+  font-size: 0.94rem;
   font-weight: 700;
-  background: #EFF8F4;
-  padding: 4px 12px;
-  border-radius: 9999px;
-  line-height: 1.35;
-  border: 1px solid rgba(0, 106, 78, 0.12);
-  margin-bottom: 14px;
+  margin-bottom: 22px;
+  letter-spacing: 0.2px;
 }
 
-/* 4. Bio */
-.bait-team-bio {
-  font-size: 0.92rem;
-  color: #556660;
-  line-height: 1.65;
-  margin: 0 0 22px 0;
-  flex-grow: 1;
-  text-align: center;
-}
-
-/* 5. Bottom Action: বিস্তারিত প্রোফাইল Button */
-.bait-team-card-action {
-  width: 100%;
+/* Card Footer: Single 'বিস্তারিত প্রোফাইল' Button */
+.bait-team-card-footer {
   margin-top: auto;
-  padding-top: 18px;
+  padding-top: 16px;
   border-top: 1px solid #EDF3F0;
+  width: 100%;
+  display: flex;
 }
 
-.btn-bait-team-profile {
+.btn-bait-team-view {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  width: 100%;
-  padding: 11px 20px;
-  background: #E8F5EE;
-  color: #006A4E;
-  font-size: 0.94rem;
+  background: linear-gradient(135deg, #F42A41 0%, #FF6A00 100%);
+  color: #FFFFFF;
+  font-size: 0.95rem;
   font-weight: 700;
+  padding: 12px 20px;
   border-radius: 10px;
   text-decoration: none;
-  border: 1px solid rgba(0, 106, 78, 0.15);
+  box-shadow: 0 4px 16px rgba(244, 42, 65, 0.35);
   transition: all 0.28s ease;
 }
 
-.btn-bait-team-profile:hover {
-  background: #006A4E;
-  color: #FFFFFF;
-  border-color: #006A4E;
+.btn-bait-team-view:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 106, 78, 0.25);
+  box-shadow: 0 8px 24px rgba(244, 42, 65, 0.5);
+  color: #FFFFFF;
 }
 
-.bait-team-btn-arrow {
-  transition: transform 0.25s ease;
-}
-
-.btn-bait-team-profile:hover .bait-team-btn-arrow {
-  transform: translateX(4px);
-}
-
-/* Bottom CTA Button */
+/* Bottom CTA button */
 .bait-team-cta-wrap {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
 }
 
 .btn-bait-team-all {
@@ -5242,7 +5193,7 @@ img {
   font-size: 0.95rem;
   font-weight: 700;
   padding: 13px 28px;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 106, 78, 0.2);
   transition: all 0.28s ease;
   text-decoration: none;
@@ -5265,10 +5216,10 @@ img {
 @media (max-width: 640px) {
   .bait-team-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
-  .bait-team-profile-item {
-    padding: 20px 18px 18px;
+  .bait-team-card-image-wrap {
+    height: 250px;
   }
 }
 

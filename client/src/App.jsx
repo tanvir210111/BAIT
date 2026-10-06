@@ -73,6 +73,7 @@ export default function App() {
 
           {/* Directories & Profiles */}
           <Route path="/instructor" element={<InstructorsDirectory />} />
+          <Route path="/team" element={<InstructorsDirectory />} />
           <Route path="/instructor/:slug" element={<PersonProfile category="instructor" />} />
           <Route path="/student" element={<StudentsDirectory />} />
           <Route path="/student/:slug" element={<PersonProfile category="student" />} />

@@ -240,11 +240,6 @@ function LearningJourneySection() {
               <h3 className="bait-journey-step-heading">{step.title}</h3>
               <p className="bait-journey-step-description">{step.desc}</p>
 
-              <div className="bait-journey-card-footer">
-                <span className="bait-journey-flow-dot"></span>
-                <span className="bait-journey-flow-text">{step.nextLabel}</span>
-              </div>
-
               {idx < 3 && (
                 <div className="bait-journey-flow-arrow" title="পরবর্তী ধাপে প্রবাহ">
                   <ArrowRight size={14} />
@@ -279,11 +274,6 @@ function LearningJourneySection() {
 
               <h3 className="bait-journey-step-heading">{step.title}</h3>
               <p className="bait-journey-step-description">{step.desc}</p>
-
-              <div className="bait-journey-card-footer">
-                <span className={`bait-journey-flow-dot ${step.isFinal ? 'bait-journey-dot-success' : ''}`}></span>
-                <span className="bait-journey-flow-text">{step.nextLabel}</span>
-              </div>
 
               {idx < 3 && (
                 <div className="bait-journey-flow-arrow" title="পরবর্তী ধাপে প্রবাহ">
@@ -634,6 +624,16 @@ function WhyBaitJourney() {
   );
 }
 
+// Helper to ensure portrait photos fill and fit the card frame perfectly without facial cropping
+const getFittedPhoto = (url) => {
+  if (!url) return 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&q=85';
+  if (url.includes('images.unsplash.com')) {
+    const base = url.split('?')[0];
+    return `${base}?w=800&auto=format&q=85`;
+  }
+  return url;
+};
+
 export default function About() {
   const [instructors, setInstructors] = useState([]);
 
@@ -670,13 +670,17 @@ export default function About() {
                 বাংলার আলো আইটি (BAIT) একটি আধুনিক IT Training &amp; Technology Academy, যেখানে প্রযুক্তি শিক্ষাকে বাস্তব দক্ষতার সাথে যুক্ত করার লক্ষ্য নিয়ে কাজ করা হয়।
               </p>
               <div className="bait-hero-ctas">
-                <Link to="/course" className="btn-bait-solid">
-                  <span>আমাদের কোর্সসমূহ</span>
-                  <ArrowRight size={18} />
+                <Link to="/course" className="slider-float-btn slider-float-green">
+                  <span className="btn-inner-content">
+                    <span>আমাদের কোর্সসমূহ</span>
+                    <ArrowRight size={18} className="icon-arrow" />
+                  </span>
                 </Link>
-                <Link to="/contact" className="btn-bait-minimal-outline">
-                  <span>যোগাযোগ করুন</span>
-                  <ChevronRight size={18} />
+                <Link to="/contact" className="slider-float-btn slider-float-secondary">
+                  <span className="btn-inner-content">
+                    <span>যোগাযোগ করুন</span>
+                    <ChevronRight size={18} className="icon-arrow" />
+                  </span>
                 </Link>
               </div>
             </div>
@@ -874,57 +878,73 @@ export default function About() {
 
           <div className="bait-team-grid">
             {(instructors.length > 0 ? instructors : [
-              { id: 1, name_bn: 'ইমরান নাজির', slug: 'imran-nazir', designation: 'প্রশিক্ষক (ডিজিটাল মিডিয়া ও এসইও)', bio: 'ময়মনসিংহ বিভাগে তরুণ শিক্ষার্থীদের ডিজিটাল মার্কেটিং ও কনটেন্ট স্ট্র্যাটেজি শেখাচ্ছেন।', photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80' },
-              { id: 2, name_bn: 'শফিকুল ইসলাম', slug: 'shafiqul-islam-rangpur', designation: 'প্রশিক্ষক (অ্যাপ্লিকেশন ডেভেলপমেন্ট)', bio: 'রংপুর অঞ্চলে মোবাইল অ্যাপ্লিকেশন ও আধুনিক জাভাস্ক্রিপ্ট প্রশিক্ষণ পরিচালনা করছেন।', photo_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80' },
-              { id: 3, name_bn: 'তানিয়া সুলতানা', slug: 'tania-sultana', designation: 'প্রশিক্ষক (ইউআই/ইউএক্স ও গ্রাফিক ডিজাইন)', bio: 'বরিশাল বিভাগের নারী ও তরুণ শিক্ষার্থীদের ডিজিটাল ডিজাইন ও ফ্রিল্যান্সিংয়ে দক্ষ করে তুলছেন।', photo_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80' }
+              { 
+                id: 1, 
+                name_bn: 'ইমরান নাজির', 
+                slug: 'imran-nazir', 
+                designation: 'প্রশিক্ষক (ডিজিটাল মিডিয়া ও এসইও)', 
+                photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80' 
+              },
+              { 
+                id: 2, 
+                name_bn: 'শফিকুল ইসলাম', 
+                slug: 'shafiqul-islam-rangpur', 
+                designation: 'প্রশিক্ষক (অ্যাপ্লিকেশন ডেভেলপমেন্ট)', 
+                photo_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80' 
+              },
+              { 
+                id: 3, 
+                name_bn: 'তানিয়া সুলতানা', 
+                slug: 'tania-sultana', 
+                designation: 'প্রশিক্ষক (ইউআই/ইউএক্স ও গ্রাফিক ডিজাইন)', 
+                photo_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&auto=format&fit=crop&q=80' 
+              }
             ]).map(inst => (
-              <div key={inst.id} className="bait-team-profile-item">
-                <div className="bait-team-card-top-accent"></div>
-
-                {/* ১. উপরে ছবি */}
-                <div className="bait-team-avatar-center-wrap">
-                  <Link to={`/instructor/${inst.slug}`} className="bait-team-avatar-wrapper" title={`${inst.name_bn}-এর প্রোফাইল দেখুন`}>
+              <div key={inst.id} className="bait-team-reference-card">
+                {/* Top Photo */}
+                <div className="bait-team-card-image-wrap">
+                  <Link to={`/instructor/${inst.slug}`} className="bait-team-img-anchor">
                     <img 
-                      src={inst.photo_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'} 
+                      src={getFittedPhoto(inst.photo_url)} 
                       alt={inst.name_bn}
-                      className="bait-team-avatar"
+                      className="bait-team-card-img"
                     />
-                    <span className="bait-team-verified-badge" title="সার্টিফাইড মেন্টর">
-                      <ShieldCheck size={14} />
-                    </span>
                   </Link>
                 </div>
 
-                {/* ২. নাম */}
-                <Link to={`/instructor/${inst.slug}`} className="bait-team-name-link" title={`${inst.name_bn}-এর প্রোফাইল দেখুন`}>
-                  <h3 className="bait-team-name">{inst.name_bn}</h3>
-                </Link>
+                {/* Accent Divider Line */}
+                <div className="bait-team-card-accent-line"></div>
 
-                {/* ৩. পদবী / ডেজিগনেশন */}
-                <div className="bait-team-designation-badge">
-                  {inst.designation || 'আইসিটি প্রশিক্ষক'}
-                </div>
-
-                {/* বিবরণ / বায়ো */}
-                <p className="bait-team-bio">
-                  {inst.bio ? (inst.bio.length > 95 ? `${inst.bio.substring(0, 95)}...` : inst.bio) : 'প্রযুক্তি খাতের অভিজ্ঞ ট্রেইনার ও মেন্টর।'}
-                </p>
-
-                {/* ৪. নিচে বিস্তারিত প্রোফাইল বাটন */}
-                <div className="bait-team-card-action">
-                  <Link to={`/instructor/${inst.slug}`} className="btn-bait-team-profile">
-                    <span>বিস্তারিত প্রোফাইল</span>
-                    <ArrowRight size={16} className="bait-team-btn-arrow" />
+                {/* Card Body */}
+                <div className="bait-team-card-body">
+                  <Link to={`/instructor/${inst.slug}`} className="bait-team-card-name-link">
+                    <h3 className="bait-team-card-name">{inst.name_bn}</h3>
                   </Link>
+
+                  <div className="bait-team-card-role">
+                    {inst.designation || 'আইসিটি প্রশিক্ষক'}
+                  </div>
+
+                  {/* Single Button: বিস্তারিত প্রোফাইল */}
+                  <div className="bait-team-card-footer">
+                    <Link to={`/instructor/${inst.slug}`} className="slider-float-btn slider-float-primary" style={{ width: '100%' }}>
+                      <span className="btn-inner-content" style={{ padding: '10px 18px', fontSize: '0.94rem' }}>
+                        <span>বিস্তারিত প্রোফাইল</span>
+                        <ArrowRight size={15} className="icon-arrow" />
+                      </span>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="bait-team-cta-wrap">
-            <Link to="/instructor" className="btn-bait-team-all">
-              <span>সব প্রশিক্ষক দেখুন</span>
-              <ArrowRight size={16} />
+            <Link to="/team" className="slider-float-btn slider-float-green">
+              <span className="btn-inner-content" style={{ padding: '13px 32px' }}>
+                <span>সকল টিম মেম্বার দেখুন</span>
+                <ArrowRight size={18} className="icon-arrow" />
+              </span>
             </Link>
           </div>
         </div>
@@ -944,13 +964,17 @@ export default function About() {
           </p>
 
           <div className="bait-cta-buttons-wrap">
-            <Link to="/course" className="btn-cta-light">
-              <span>কোর্স দেখুন</span>
-              <ArrowRight size={18} />
+            <Link to="/course" className="slider-float-btn slider-float-secondary">
+              <span className="btn-inner-content" style={{ padding: '13px 32px' }}>
+                <span>কোর্স দেখুন</span>
+                <ArrowRight size={18} className="icon-arrow" />
+              </span>
             </Link>
-            <Link to="/contact" className="btn-cta-outline-light">
-              <span>যোগাযোগ করুন</span>
-              <ChevronRight size={18} />
+            <Link to="/contact" className="slider-float-btn slider-float-green">
+              <span className="btn-inner-content" style={{ padding: '13px 30px' }}>
+                <span>যোগাযোগ করুন</span>
+                <ChevronRight size={18} className="icon-arrow" />
+              </span>
             </Link>
           </div>
         </div>
