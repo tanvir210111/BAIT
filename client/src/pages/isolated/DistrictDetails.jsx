@@ -1,0 +1,106 @@
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Map, ArrowRight } from 'lucide-react';
+
+/**
+ * Isolated Component: Preserved for future activation.
+ * Removed from current public flow per project requirements.
+ */
+export default function DistrictDetails() {
+  const { slug } = useParams();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/api/districts/${slug}`)
+      .then(res => res.json())
+      .then(resData => {
+        setData(resData);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [slug]);
+
+  if (loading) {
+    return <div className="container" style={{ padding: '80px 0', textAlign: 'center' }}>জেলার তথ্য লোড হচ্ছে...</div>;
+  }
+
+  if (!data || !data.district) {
+    return (
+      <div className="container" style={{ padding: '80px 0', textAlign: 'center' }}>
+        <h2>জেলা পাওয়া যায়নি</h2>
+        <Link to="/" className="btn btn-primary" style={{ marginTop: '20px' }}>হোমে ফিরুন</Link>
+      </div>
+    );
+  }
+
+  const { district, upazilas, instructors, students, journalists } = data;
+
+  return (
+    <div>
+      <div className="page-header-banner">
+        <div className="container">
+          <div className="breadcrumb">
+            <Link to="/">হোম</Link>
+            <span>/</span>
+            <span>{district.name_bn}</span>
+          </div>
+          <h1 className="page-banner-title">{district.name_bn} জেলা</h1>
+          <p className="page-banner-subtitle">
+            {district.description}
+          </p>
+        </div>
+      </div>
+
+      <div className="container" style={{ paddingBottom: '70px' }}>
+        <div className="details-card-box">
+          <h2 className="details-card-title">
+            <Map size={22} color="var(--primary)" />
+            <span>জেলার পরিচিতি ও প্রশাসনিক তথ্য</span>
+          </h2>
+          <p style={{ fontSize: '1.02rem', lineHeight: '1.8', color: 'var(--text-main)', marginBottom: '18px' }}>
+            {district.description} BAIT {district.name_bn} জেলার প্রতিটি উপজেলায় তথ্যপ্রযুক্তি ল্যাব পরিচালনা করে আসছে।
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', background: '#f8fafc', padding: '16px', borderRadius: '8px' }}>
+            <div>
+              <strong>প্রশাসনিক বিভাগ:</strong> {district.division_name}
+            </div>
+            <div>
+              <strong>মোট উপজেলা:</strong> {upazilas?.length || 0} টি
+            </div>
+            <div>
+              <strong>BAIT শিক্ষার্থী:</strong> {students?.length || 0} জন
+            </div>
+          </div>
+        </div>
+
+        <div style={{ marginTop: '40px' }}>
+          <h2 style={{ fontSize: '1.6rem', color: 'var(--primary-dark)', marginBottom: '20px' }}>
+            {district.name_bn} জেলার অধীনস্থ উপজেলাসমূহ
+          </h2>
+
+          <div className="entity-grid">
+            {upazilas?.map(u => (
+              <div key={u.id} className="standard-card">
+                <div className="standard-card-header">
+                  <span className="badge-tag badge-teal">উপজেলা</span>
+                </div>
+                <h3 style={{ fontSize: '1.2rem', margin: '8px 0', color: 'var(--primary-dark)' }}>
+                  {u.name_bn} উপজেলা
+                </h3>
+                <Link to={`/upazila/${u.slug}`} className="card-btn" style={{ marginTop: 'auto' }}>
+                  <span>বিস্তারিত দেখুন</span>
+                  <ArrowRight size={16} />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

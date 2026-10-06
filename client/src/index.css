@@ -3801,5 +3801,1641 @@ img {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   BAIT Institutional & Editorial "About Us" Page Styles
+   Palette:
+   - Primary Green: #006A4E
+   - Deep Green: #003D2E
+   - Darkest Green: #002C22
+   - Accent Red: #F42A41 (used strictly minimally as accent)
+   - Soft Green: #EFF8F4
+   - Background: #FAFCFB
+   - White: #FFFFFF
+   - Text: #17201D
+   - Muted: #66756F
+   - Border: #E2EAE7
+   ========================================================================== */
+
+.bait-about-manifesto {
+  background-color: #FAFCFB;
+  color: #17201D;
+  overflow-x: hidden;
+  font-family: inherit;
+}
+
+/* --- Shared Editorial Utilities --- */
+.editorial-thin-divider {
+  height: 1px;
+  background: #E2EAE7;
+  border: none;
+  margin: 40px 0;
+}
+
+.editorial-brand-divider {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 2px;
+  margin: 36px 0;
+}
+
+.brand-divider-green {
+  height: 100%;
+  width: 70px;
+  background: #006A4E;
+}
+
+.brand-divider-red {
+  height: 100%;
+  width: 24px;
+  background: #F42A41;
+}
+
+.brand-divider-gray {
+  height: 100%;
+  flex-grow: 1;
+  background: #E2EAE7;
+}
+
+/* --- SECTION 01: HERO --- */
+.bait-hero-section {
+  background-color: #FAFCFB;
+  padding: 100px 0 90px 0;
+  border-bottom: none;
+}
+
+.bait-hero-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bait-hero-label {
+  display: inline-block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #006A4E;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.bait-hero-title {
+  font-size: 3.4rem;
+  font-weight: 900;
+  color: #003D2E;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.bait-hero-statement {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #006A4E;
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+
+.bait-hero-desc {
+  font-size: 1.12rem;
+  color: #66756F;
+  line-height: 1.85;
+  margin-bottom: 36px;
+  max-width: 620px;
+}
+
+.bait-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.btn-bait-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #006A4E;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding: 14px 32px;
+  border-radius: 6px;
+  border: 1px solid #006A4E;
+  transition: all 0.25s ease;
+}
+
+.btn-bait-solid:hover {
+  background: #003D2E;
+  border-color: #003D2E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 106, 78, 0.2);
+}
+
+.btn-bait-minimal-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #003D2E !important;
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding: 14px 28px;
+  border-radius: 6px;
+  border: 1.5px solid #E2EAE7;
+  transition: all 0.25s ease;
+}
+
+.btn-bait-minimal-outline:hover {
+  border-color: #006A4E;
+  color: #006A4E !important;
+  background: #EFF8F4;
+}
+
+/* Large Typographic Hero Visual Composition (NOT a card) */
+.bait-hero-visual-frame {
+  background: linear-gradient(145deg, #003D2E 0%, #002C22 100%);
+  border-radius: 20px;
+  padding: 50px 40px;
+  color: #FFFFFF;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 44, 34, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bait-hero-visual-frame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(rgba(239, 248, 244, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.bait-hero-visual-watermark {
+  font-size: 5.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.bait-hero-visual-red-accent {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #F42A41;
+  display: inline-block;
+}
+
+.bait-hero-visual-subline {
+  font-size: 0.92rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #A3D9C9;
+  font-weight: 700;
+  margin-bottom: 28px;
+}
+
+.bait-hero-visual-manifesto-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #E2EAE7;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- SECTION 02: BAIT STORY --- */
+.bait-story-section {
+  background: #003D2E;
+  padding: 110px 0;
+  border-top: 4px solid #F42A41;
+  border-bottom: 4px solid #F42A41;
+  position: relative;
+}
+
+.bait-story-grand-heading {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+  max-width: 900px;
+}
+
+.bait-story-section .editorial-brand-divider .brand-divider-green {
+  background: #10B981;
+}
+
+.bait-story-section .editorial-brand-divider .brand-divider-red {
+  background: #F42A41;
+}
+
+.bait-story-section .editorial-brand-divider .brand-divider-gray {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.bait-story-body-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.bait-story-sublabel {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #34D399;
+  line-height: 1.4;
+}
+
+.bait-story-text-column p {
+  font-size: 1.1rem;
+  line-height: 1.95;
+  color: #E2ECE7;
+  margin-bottom: 22px;
+}
+
+.bait-story-text-column p:last-child {
+  margin-bottom: 0;
+  color: #9DBBB0;
+}
+
+/* --- SECTION 03: WHO WE ARE (ASYMMETRIC) --- */
+.bait-who-section {
+  background: #FAFCFB;
+  padding: 110px 0;
+  border-bottom: 1px solid #E2EAE7;
+}
+
+.bait-who-asymmetric-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.bait-who-visual-block {
+  background: #EFF8F4;
+  border-left: 6px solid #006A4E;
+  border-radius: 4px;
+  padding: 45px 38px;
+  position: relative;
+}
+
+.bait-who-visual-block h3 {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: #003D2E;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.bait-who-visual-block p {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: #4A5B55;
+  margin-bottom: 24px;
+}
+
+.bait-who-features-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bait-who-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #003D2E;
+}
+
+.bait-who-feature-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F42A41;
+}
+
+.bait-who-content-heading {
+  font-size: 2.3rem;
+  font-weight: 900;
+  color: #003D2E;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+
+.bait-who-content-text p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: #17201D;
+  margin-bottom: 20px;
+}
+
+.bait-who-manifesto-quote {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #003D2E;
+  background: #FFFFFF;
+  border-left: 4px solid #F42A41;
+  padding: 18px 22px;
+  margin-top: 28px;
+  line-height: 1.7;
+}
+
+/* --- SECTION 04: VISION & MISSION (FULL-WIDTH DEEP GREEN) --- */
+.bait-vm-section {
+  background-color: #003D2E;
+  color: #FFFFFF;
+  padding: 110px 0;
+}
+
+.bait-vm-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  position: relative;
+}
+
+.bait-vm-divider-center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.bait-vm-entry {
+  padding-right: 20px;
+}
+
+.bait-vm-number {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #F42A41;
+  display: inline-block;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.bait-vm-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.bait-vm-statement {
+  font-size: 1.25rem;
+  line-height: 1.85;
+  color: #EFF8F4;
+  font-weight: 400;
+}
+
+/* --- SECTION 05: HOW WE TEACH (8-STEP LEARNING JOURNEY) --- */
+.bait-journey-section {
+  background-color: #F7FAF8;
+  padding: 100px 0;
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.bait-journey-header {
+  margin-bottom: 50px;
+}
+
+.bait-journey-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #E8F5EE;
+  color: #006A4E;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid #CDE7D9;
+  margin-bottom: 14px;
+}
+
+.bait-journey-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #006A4E;
+  box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.15);
+}
+
+.bait-journey-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #003D2E;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.bait-journey-subtitle {
+  font-size: 1.15rem;
+  color: #006A4E;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.bait-journey-grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+/* Keyframes for Rotating Border Beam (Used on Middle Track & Step 08) */
+@keyframes journeyRotateBorderBeam {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Keyframes for Sequential Traveling Energy Wave across steps */
+@keyframes stepSequentialWave {
+  0%, 100% {
+    border-color: #E1ECE6;
+    box-shadow: 0 4px 18px rgba(0, 61, 46, 0.04);
+  }
+  12% {
+    border-color: #10B981;
+    box-shadow: 0 10px 24px rgba(16, 185, 129, 0.22);
+    transform: translateY(-5px);
+  }
+  24% {
+    border-color: #E1ECE6;
+    box-shadow: 0 4px 18px rgba(0, 61, 46, 0.04);
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for Step Flow Connecting Arrows */
+@keyframes flowArrowGlide {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-50%) translateX(6px);
+    opacity: 1;
+    color: #F42A41;
+  }
+}
+
+/* Step Card Base */
+.bait-journey-card {
+  position: relative;
+  z-index: 2;
+  border-radius: 18px;
+  background: #FFFFFF;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  animation: stepSequentialWave 4.5s ease-in-out infinite;
+}
+
+.bait-journey-card-inner {
+  background: #FFFFFF;
+  border: 1.5px solid #E1ECE6;
+  border-radius: 18px;
+  padding: 24px 22px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bait-journey-card:hover {
+  transform: translateY(-8px) !important;
+  z-index: 5;
+}
+
+.bait-journey-card:hover .bait-journey-card-inner {
+  border-color: #006A4E;
+  box-shadow: 0 16px 36px rgba(0, 106, 78, 0.15);
+}
+
+.bait-journey-card:hover .bait-journey-accent-line {
+  width: 52px;
+}
+
+.bait-journey-card:hover .bait-journey-icon-wrap {
+  transform: scale(1.12) rotate(4deg);
+}
+
+/* Card Top Section */
+.bait-journey-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.bait-journey-number-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.bait-journey-num {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #006A4E;
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.bait-journey-phase-tag {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #5A7067;
+  background: #F1F6F3;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #E0ECE6;
+}
+
+/* Icon Wrap & Thematic Color Badges */
+.bait-journey-icon-wrap {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.bait-icon-emerald {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1.5px solid #A7F3D0;
+}
+
+.bait-icon-amber {
+  background: #FFFBEB;
+  color: #D97706;
+  border: 1.5px solid #FDE68A;
+}
+
+.bait-icon-teal {
+  background: #F0FDFA;
+  color: #0D9488;
+  border: 1.5px solid #99F6E4;
+}
+
+.bait-icon-indigo {
+  background: #EEF2FF;
+  color: #4F46E5;
+  border: 1.5px solid #C7D2FE;
+}
+
+.bait-icon-rose {
+  background: #FFF1F2;
+  color: #E11D48;
+  border: 1.5px solid #FECDD3;
+}
+
+.bait-icon-cyan {
+  background: #ECFEFF;
+  color: #0891B2;
+  border: 1.5px solid #A5F3FC;
+}
+
+.bait-icon-blue {
+  background: #EFF6FF;
+  color: #2563EB;
+  border: 1.5px solid #BFDBFE;
+}
+
+.bait-icon-gold {
+  background: #ECFDF5;
+  color: #006A4E;
+  border: 1.5px solid #A7F3D0;
+}
+
+/* Card Accent Lines */
+.bait-journey-accent-line {
+  width: 32px;
+  height: 3px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+  transition: width 0.3s ease;
+}
+
+.bait-journey-accent-emerald .bait-journey-accent-line {
+  background: linear-gradient(90deg, #059669, #34D399);
+}
+
+.bait-journey-accent-amber .bait-journey-accent-line {
+  background: linear-gradient(90deg, #D97706, #FBBF24);
+}
+
+.bait-journey-accent-teal .bait-journey-accent-line {
+  background: linear-gradient(90deg, #0D9488, #2DD4BF);
+}
+
+.bait-journey-accent-indigo .bait-journey-accent-line {
+  background: linear-gradient(90deg, #4F46E5, #818CF8);
+}
+
+.bait-journey-accent-rose .bait-journey-accent-line {
+  background: linear-gradient(90deg, #E11D48, #FB7185);
+}
+
+.bait-journey-accent-cyan .bait-journey-accent-line {
+  background: linear-gradient(90deg, #0891B2, #38BDF8);
+}
+
+.bait-journey-accent-blue .bait-journey-accent-line {
+  background: linear-gradient(90deg, #2563EB, #60A5FA);
+}
+
+.bait-journey-accent-gold .bait-journey-accent-line {
+  background: linear-gradient(90deg, #F42A41, #FF6B6B);
+}
+
+/* Card Content */
+.bait-journey-step-heading {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #003D2E;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.bait-journey-step-description {
+  font-size: 0.93rem;
+  color: #5B6D66;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+/* Card Footer Flow Info */
+.bait-journey-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #006A4E;
+  padding-top: 10px;
+  border-top: 1px dashed #E2EAE7;
+  margin-top: auto;
+}
+
+.bait-journey-flow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.bait-journey-dot-success {
+  background: #F42A41;
+}
+
+/* Flow Arrow Connector between steps */
+.bait-journey-flow-arrow {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #A7F3D0;
+  color: #006A4E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 106, 78, 0.15);
+  animation: flowArrowGlide 1.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.bait-journey-flow-to-next-row {
+  transform: translateY(-50%) rotate(45deg);
+  border-color: #FECDD3;
+  color: #F42A41;
+}
+
+/* --- CONTINUOUS CONNECTED SVG JOURNEY TRACK (01 -> 02 -> 03 -> 04 -> CURVED BRIDGE -> 05 -> 06 -> 07 -> 08) --- */
+.bait-journey-track-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.bait-journey-svg-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bait-journey-path-base {
+  stroke: url(#journeyColorTrackGrad);
+  stroke-width: 3.5px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 1;
+}
+
+.bait-journey-path-beam {
+  stroke: url(#journeyBeamFlow);
+  stroke-width: 3.5px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 22 14;
+  animation: journeyColorFlow 2.2s linear infinite;
+}
+
+@keyframes journeyColorFlow {
+  0% {
+    stroke-dashoffset: 80;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.bait-journey-row-top {
+  margin-bottom: 56px;
+}
+
+.bait-journey-row-bottom {
+  margin-top: 0;
+}
+
+/* Step 08: Uses standard card styling */
+
+/* Responsive adjustments for 8-step journey */
+@media (max-width: 1024px) {
+  .bait-journey-grid-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .bait-journey-flow-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .bait-journey-grid-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bait-journey-middle-inner {
+    padding: 10px 16px;
+  }
+
+  .bait-journey-middle-badge {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
+/* --- SECTION 06: WHY BAIT (ORGANIC LEARNING JOURNEY) --- */
+.bait-manifesto-section {
+  background: #003F2E;
+  padding: 110px 0 120px;
+  border-top: 4px solid #F42A41;
+  border-bottom: 4px solid #F42A41;
+  position: relative;
+  overflow: hidden;
+}
+
+.bait-manifesto-section .bait-section-editorial-title {
+  color: #FFFFFF;
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.bait-manifesto-section .why-bait-header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #34D399;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  margin-bottom: 14px;
+}
+
+.bait-manifesto-section .why-bait-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+}
+
+.bait-manifesto-section .why-bait-section-lead {
+  font-size: 1.15rem;
+  color: #CFE3DC;
+  margin-top: 10px;
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+/* Organic Journey Container */
+.why-organic-journey {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  margin: 64px auto 0 auto;
+  box-sizing: border-box;
+}
+
+.why-organic-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Base Inactive Path */
+.why-organic-path-base {
+  fill: none;
+  stroke: #1D5E4E;
+  stroke-width: 3.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.6;
+}
+
+/* Active Drawn Path: Glowing Colouring Stroke */
+.why-organic-path-active {
+  fill: none;
+  stroke: #F42A41;
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 8px #F42A41) drop-shadow(0 0 18px rgba(244, 42, 65, 0.65));
+}
+
+/* Steps List */
+.why-organic-steps-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step Row (Alternating Desktop Alignment) */
+.why-organic-step-row {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  width: 100%;
+}
+
+.why-organic-step-row:last-child {
+  margin-bottom: 0;
+}
+
+.why-organic-step-row.step-align-right {
+  justify-content: flex-end;
+}
+
+.why-organic-step-row.step-align-left {
+  justify-content: flex-start;
+}
+
+/* Step Wrapper (Connects Square Box + Connector + Circle) */
+.why-organic-step-box-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Square Box containing the text */
+.why-organic-square-card {
+  flex: 1;
+  background: rgba(0, 48, 35, 0.82);
+  border: 1.5px solid rgba(43, 128, 107, 0.42);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Visited / Already Reached Step */
+.why-organic-step-row.is-visited .why-organic-square-card {
+  border-color: rgba(244, 42, 65, 0.45);
+  background: rgba(0, 52, 38, 0.88);
+}
+
+/* Currently Active Floating Box */
+.why-organic-step-row.is-current-active .why-organic-square-card {
+  border-color: #F42A41 !important;
+  background: rgba(0, 62, 44, 0.96) !important;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.5), 0 0 30px rgba(244, 42, 65, 0.38) !important;
+  animation: floatCardActive 2.2s ease-in-out infinite !important;
+  z-index: 10;
+}
+
+@keyframes floatCardActive {
+  0%, 100% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Connector Line between Circle and Box */
+.why-organic-node-connector {
+  width: 16px;
+  height: 2.5px;
+  background: #2B806B;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: all 0.4s ease;
+}
+
+.why-organic-step-row.is-visited .why-organic-node-connector {
+  background: #F42A41;
+  opacity: 0.75;
+}
+
+.why-organic-step-row.is-current-active .why-organic-node-connector {
+  background: #F42A41 !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 12px #F42A41 !important;
+}
+
+/* Circle containing the icon */
+.why-organic-node-dot {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  background: #003F2E;
+  border: 2.5px solid #2B806B;
+  color: #6A9B8E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.why-organic-step-row.is-visited .why-organic-node-dot {
+  border-color: #F42A41;
+  color: #FFFFFF;
+  background: #004534;
+}
+
+.why-organic-step-row.is-current-active .why-organic-node-dot {
+  border-color: #F42A41 !important;
+  color: #FFFFFF !important;
+  background: #004D3A !important;
+  box-shadow: 0 0 24px rgba(244, 42, 65, 0.85), inset 0 0 12px rgba(244, 42, 65, 0.35) !important;
+  animation: pulseNodeDot 1.6s ease-in-out infinite !important;
+}
+
+@keyframes pulseNodeDot {
+  0%, 100% {
+    transform: scale(1.12);
+    box-shadow: 0 0 20px rgba(244, 42, 65, 0.75);
+  }
+  50% {
+    transform: scale(1.22);
+    box-shadow: 0 0 34px rgba(244, 42, 65, 1);
+  }
+}
+
+/* Card Metadata (Number) */
+.why-organic-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.why-organic-num {
+  font-size: 1.85rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #2B806B;
+  letter-spacing: -0.5px;
+  transition: color 0.4s ease;
+  display: inline-block;
+}
+
+.why-organic-step-row.is-visited .why-organic-num {
+  color: #F42A41;
+}
+
+.why-organic-step-row.is-current-active .why-organic-num {
+  color: #F42A41 !important;
+  text-shadow: 0 0 16px rgba(244, 42, 65, 0.65) !important;
+}
+
+/* Heading */
+.why-organic-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.35;
+  margin: 0 0 8px 0;
+}
+
+/* Red Accent Line */
+.why-organic-accent-line {
+  height: 2px;
+  background: #F42A41;
+  border-radius: 2px;
+  width: 0;
+  opacity: 0;
+  margin-bottom: 10px;
+  transition: width 0.4s ease, opacity 0.4s ease;
+}
+
+.why-organic-step-row.is-visited .why-organic-accent-line {
+  width: 24px;
+  opacity: 0.85;
+}
+
+.why-organic-step-row.is-current-active .why-organic-accent-line {
+  width: 42px !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 10px rgba(244, 42, 65, 0.8) !important;
+}
+
+/* Description */
+.why-organic-desc {
+  font-size: 0.94rem;
+  color: #CFE3DC;
+  line-height: 1.65;
+  margin: 0;
+  opacity: 0.92;
+}
+
+/* Glowing Traveling Head in SVG */
+.why-organic-head-glow {
+  pointer-events: none;
+  filter: drop-shadow(0 0 10px #F42A41);
+}
+
+.head-pulse-outer {
+  animation: headPulseRing 1.4s ease-in-out infinite;
+}
+
+@keyframes headPulseRing {
+  0%, 100% {
+    r: 16;
+    opacity: 0.35;
+  }
+  50% {
+    r: 25;
+    opacity: 0.12;
+  }
+}
+
+/* Mobile Layout (< 768px) */
+@media (max-width: 767px) {
+  .why-organic-journey {
+    margin-top: 36px;
+    padding: 0 12px;
+  }
+
+  .why-organic-step-row {
+    justify-content: flex-start !important;
+    margin-bottom: 36px;
+  }
+
+  .why-organic-step-box-wrapper {
+    max-width: 100% !important;
+    gap: 12px;
+  }
+
+  /* On mobile, flip left-aligned rows so Circle is first (left), Connector middle, Card on right */
+  .step-align-left .why-organic-step-box-wrapper {
+    flex-direction: row-reverse !important;
+  }
+
+  .why-organic-square-card {
+    padding: 16px 18px;
+  }
+
+  .why-organic-node-dot {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .why-organic-node-connector {
+    width: 10px;
+  }
+
+  .why-organic-num {
+    font-size: 1.5rem;
+  }
+
+  .why-organic-title {
+    font-size: 1.15rem;
+  }
+
+  .why-organic-desc {
+    font-size: 0.88rem;
+  }
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .why-organic-path-active {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+
+  .why-organic-content-inner,
+  .why-organic-node-dot,
+  .why-organic-num,
+  .why-organic-accent-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    width: 32px !important;
+  }
+
+  .why-organic-num {
+    color: #F42A41 !important;
+  }
+
+  .why-organic-node-dot {
+    border-color: #F42A41 !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* --- SECTION 07: OUR TEAM (PREMIUM REDESIGN) --- */
+.bait-team-section {
+  background: #F8FAF9;
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(0, 106, 78, 0.06) 0%, transparent 70%);
+  padding: 100px 0;
+  border-top: 1px solid #E5ECE9;
+  border-bottom: 1px solid #E2EAE7;
+  position: relative;
+}
+
+.bait-team-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #E8F5EE;
+  color: #006A4E;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  border: 1px solid rgba(0, 106, 78, 0.15);
+}
+
+.bait-team-section-lead {
+  font-size: 1.08rem;
+  color: #556660;
+  margin-top: 10px;
+  line-height: 1.6;
+  max-width: 650px;
+}
+
+.bait-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 44px;
+  margin-bottom: 44px;
+}
+
+/* Premium Card Container */
+.bait-team-profile-item {
+  background: #FFFFFF;
+  border: 1px solid #E3ECE8;
+  border-radius: 20px;
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(0, 61, 46, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bait-team-card-top-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3.5px;
+  background: linear-gradient(90deg, #006A4E 0%, #2B806B 60%, #F42A41 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.bait-team-profile-item:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 106, 78, 0.28);
+  box-shadow: 0 20px 42px rgba(0, 61, 46, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.bait-team-profile-item:hover .bait-team-card-top-accent {
+  opacity: 1;
+}
+
+/* 1. Avatar at Top */
+.bait-team-avatar-center-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.bait-team-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.bait-team-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3.5px solid #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 61, 46, 0.12), 0 0 0 2px #E2EAE7;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display: block;
+}
+
+.bait-team-profile-item:hover .bait-team-avatar {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(0, 106, 78, 0.2), 0 0 0 2.5px #006A4E;
+}
+
+.bait-team-verified-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #006A4E;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* 2. Name */
+.bait-team-name-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+.bait-team-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #003D2E;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.bait-team-name-link:hover .bait-team-name {
+  color: #006A4E;
+}
+
+/* 3. Designation */
+.bait-team-designation-badge {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: #006A4E;
+  font-weight: 700;
+  background: #EFF8F4;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  line-height: 1.35;
+  border: 1px solid rgba(0, 106, 78, 0.12);
+  margin-bottom: 14px;
+}
+
+/* 4. Bio */
+.bait-team-bio {
+  font-size: 0.92rem;
+  color: #556660;
+  line-height: 1.65;
+  margin: 0 0 22px 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* 5. Bottom Action: বিস্তারিত প্রোফাইল Button */
+.bait-team-card-action {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid #EDF3F0;
+}
+
+.btn-bait-team-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 20px;
+  background: #E8F5EE;
+  color: #006A4E;
+  font-size: 0.94rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid rgba(0, 106, 78, 0.15);
+  transition: all 0.28s ease;
+}
+
+.btn-bait-team-profile:hover {
+  background: #006A4E;
+  color: #FFFFFF;
+  border-color: #006A4E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 106, 78, 0.25);
+}
+
+.bait-team-btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+.btn-bait-team-profile:hover .bait-team-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Bottom CTA Button */
+.bait-team-cta-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-bait-team-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #006A4E;
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 106, 78, 0.2);
+  transition: all 0.28s ease;
+  text-decoration: none;
+}
+
+.btn-bait-team-all:hover {
+  background: #004D3A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 106, 78, 0.32);
+  color: #FFFFFF;
+}
+
+@media (max-width: 991px) {
+  .bait-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .bait-team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .bait-team-profile-item {
+    padding: 20px 18px 18px;
+  }
+}
+
+
+/* --- SECTION 08: FINAL STATEMENT / CTA --- */
+.bait-cta-statement-section {
+  background-color: #003D2E;
+  color: #FFFFFF;
+  padding: 85px 0;
+  text-align: center;
+}
+
+.bait-cta-statement-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.bait-cta-statement-subtitle {
+  font-size: 1.15rem;
+  color: #E2EAE7;
+  margin-bottom: 34px;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bait-cta-buttons-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.btn-cta-light {
+  background: #FFFFFF;
+  color: #003D2E !important;
+  font-weight: 800;
+  font-size: 1.02rem;
+  padding: 14px 34px;
+  border-radius: 6px;
+  border: 1px solid #FFFFFF;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cta-light:hover {
+  background: #EFF8F4;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cta-outline-light {
+  background: transparent;
+  color: #FFFFFF !important;
+  font-weight: 700;
+  font-size: 1.02rem;
+  padding: 14px 30px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cta-outline-light:hover {
+  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE RULES --- */
+@media (max-width: 1024px) {
+  .bait-hero-layout,
+  .bait-story-body-grid,
+  .bait-who-asymmetric-grid,
+  .bait-vm-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .bait-vm-divider-center {
+    display: none;
+  }
+
+  .bait-journey-grid-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 24px;
+  }
+
+  .bait-manifesto-entry {
+    grid-template-columns: 80px 1fr;
+  }
+
+  .bait-manifesto-detail {
+    grid-column: 2 / 3;
+  }
+
+  .bait-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .bait-hero-title {
+    font-size: 2.4rem;
+  }
+  .bait-hero-statement {
+    font-size: 1.3rem;
+  }
+  .bait-story-grand-heading {
+    font-size: 2rem;
+  }
+  .bait-vm-title {
+    font-size: 1.8rem;
+  }
+  .bait-cta-statement-title {
+    font-size: 2rem;
+  }
+
+  .bait-journey-grid-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .bait-journey-middle-divider {
+    margin: 28px 0;
+  }
+
+  .bait-manifesto-entry {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bait-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bait-hero-ctas,
+  .bait-cta-buttons-wrap {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-bait-solid,
+  .btn-bait-minimal-outline,
+  .btn-cta-light,
+  .btn-cta-outline-light {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 
 

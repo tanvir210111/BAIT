@@ -16,6 +16,8 @@ export const mockCourses = [
     discount_price: 6500,
     lessons_count: 72,
     projects_count: 10,
+    instructor_name: 'ইঞ্জিনিয়ার তানভীর আহমেদ',
+    instructor_slug: 'engr-tanvir-ahmed',
     curriculum: [
       { title: 'মডিউল ১: ওয়েব ফান্ডামেন্টালস ও আধুনিক জাভাস্ক্রিপ্ট (ES6+)' },
       { title: 'মডিউল ২: রিঅ্যাক্ট ও আধুনিক স্টেট ম্যানেজমেন্ট' },
@@ -35,6 +37,8 @@ export const mockCourses = [
     discount_price: 5500,
     lessons_count: 48,
     projects_count: 8,
+    instructor_name: 'শারমিন সুলতানা',
+    instructor_slug: 'sharmin-sultana',
     curriculum: [
       { title: 'মডিউল ১: ডিজাইন প্রিন্সিপালস ও টাইপোগ্রাফি' },
       { title: 'মডিউল ২: অ্যাডোবি ইলাস্ট্রেটর ও ফটোশপ মাস্টারি' },
@@ -54,6 +58,8 @@ export const mockCourses = [
     discount_price: 7500,
     lessons_count: 64,
     projects_count: 6,
+    instructor_name: 'ড. ফারহানা জামান',
+    instructor_slug: 'dr-farhana-zaman',
     curriculum: [
       { title: 'মডিউল ১: পাইথন ফান্ডামেন্টালস ও ওওপি (OOP)' },
       { title: 'মডিউল ২: ডেটা ক্লিনিং ও অ্যানালাইসিস (Pandas, NumPy)' },
@@ -73,6 +79,8 @@ export const mockCourses = [
     discount_price: 7000,
     lessons_count: 56,
     projects_count: 7,
+    instructor_name: 'অধ্যাপক মোঃ জহিরুল হক',
+    instructor_slug: 'prof-zahirul-haque',
     curriculum: [
       { title: 'মডিউল ১: ডার্ট প্রোগ্রামিং ফান্ডামেন্টালস' },
       { title: 'মডিউল ২: ফ্লাটার উইজেটস ও রেসপনসিভ লেআউট' },
@@ -90,7 +98,7 @@ export const mockEmployees = [
     designation: 'সিনিয়র জনসংযোগ ও মিডিয়া কর্মকর্তা',
     department: 'জনসংযোগ ও যোগাযোগ শাখা',
     photo_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80',
-    bio: 'বাংলাদেশের ৬৪ জেলার মাঠপর্যায়ের সাংবাদিক ও প্রতিনিধিদের সাথে সার্বক্ষণিক যোগাযোগ ও মিডিয়া সমন্বয়।'
+    bio: 'বাংলাদেশের ৬৪ জেলার মাঠপর্যায়ের প্রশিক্ষণ সমন্বয় ও গণযোগাযোগ রক্ষা করে চলেছেন।'
   },
   {
     id: 2,
@@ -118,5 +126,268 @@ export const mockEmployees = [
     department: 'নির্বাহী পরিচালনা ও নীতি নির্ধারণ',
     photo_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=80',
     bio: 'বিগত ২৫ বছর ধরে তথ্যপ্রযুক্তি শিক্ষা ও প্রশাসনিক নেতৃত্বে যুক্ত আছেন। BAIT-এর দূরদর্শী রূপরেখা প্রণয়নে অগ্রণী ভূমিকা পালন করছেন।'
+  }
+];
+
+// Student Panel Mock Data
+export const mockStudentProfile = {
+  id: 1,
+  name_bn: 'তানভীর হোসেন',
+  name_en: 'Tanvir Hossain',
+  email: 'tanvir.kapasia@gmail.com',
+  phone: '01711006214',
+  category: 'student',
+  student_id: 'BAIT-2026-ST001',
+  enrollment_date: '2026-01-15',
+  batch: 'ব্যাচ-০১ (MERN Full Stack)',
+  course_name: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+  photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+  division_name: 'ঢাকা',
+  district_name: 'গাজীপুর',
+  upazila_name: 'কাপাসিয়া',
+  blood_group: 'B+',
+  guardian_phone: '01712000000',
+  bio: 'উদ্যমী তরুণ সফটওয়্যার শিক্ষার্থী। আধুনিক ওয়েব প্রযুক্তি শিখে আন্তর্জাতিক বাজারে ক্যারিয়ার গড়তে প্রতিশ্রুতিবদ্ধ।'
+};
+
+export const mockEnrolledCourses = [
+  {
+    id: 1,
+    title: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    batch: 'ব্যাচ-০১',
+    instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ',
+    progress: 68,
+    totalLessons: 72,
+    completedLessons: 49,
+    nextClass: 'আজ রাত ৯:০০ টায়',
+    coverImage: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&auto=format&fit=crop&q=80',
+    status: 'চলমান',
+    currentTopic: 'Express.js REST API & JWT Authentication'
+  },
+  {
+    id: 2,
+    title: 'প্রফেশনাল গ্রাফিক ও ইউআই/ইউএক্স ডিজাইন',
+    batch: 'ব্যাচ-০৩',
+    instructor: 'শারমিন সুলতানা',
+    progress: 100,
+    totalLessons: 48,
+    completedLessons: 48,
+    nextClass: 'কোর্স সম্পন্ন হয়েছে',
+    coverImage: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600&auto=format&fit=crop&q=80',
+    status: 'সমাপ্ত',
+    currentTopic: 'ক্যাপস্টোন পোর্টফোলিও রিভিউ'
+  }
+];
+
+export const mockLiveClasses = [
+  {
+    id: 101,
+    courseTitle: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    topic: 'Module 14: Redux Toolkit & RTK Query Architecture',
+    instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ',
+    date: 'আজ (মঙ্গলবার)',
+    time: 'রাত ৯:০০ - ১১:০০',
+    platform: 'Zoom Live',
+    status: 'upcoming',
+    joinUrl: 'https://zoom.us/j/bait-live-mern'
+  },
+  {
+    id: 102,
+    courseTitle: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    topic: 'Module 13: Advanced React Hooks & Context API Live Practice',
+    instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ',
+    date: 'রবিবার, ০৪ অক্টোবর ২০২৬',
+    time: 'রাত ৯:০০ - ১১:০০',
+    platform: 'Zoom Live',
+    status: 'completed',
+    recordingUrl: 'https://bait.academy/recordings/mern-class-13'
+  },
+  {
+    id: 103,
+    courseTitle: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    topic: 'Module 12: React Router v7 & State Management Basics',
+    instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ',
+    date: 'বৃহস্পতিবার, ০১ অক্টোবর ২০২৬',
+    time: 'রাত ৯:০০ - ১১:০০',
+    platform: 'Zoom Live',
+    status: 'completed',
+    recordingUrl: 'https://bait.academy/recordings/mern-class-12'
+  }
+];
+
+export const mockClassRoutine = [
+  { day: 'রবিবার', time: 'রাত ০৯:০০ - ১১:০০', course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট', instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ', room: 'Zoom Room A' },
+  { day: 'মঙ্গলবার', time: 'রাত ০৯:০০ - ১১:০০', course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট', instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ', room: 'Zoom Room A' },
+  { day: 'বৃহস্পতিবার', time: 'রাত ০৯:০০ - ১১:০০', course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট', instructor: 'ইঞ্জিনিয়ার তানভীর আহমেদ', room: 'Zoom Room A' },
+  { day: 'শুক্রবার', time: 'বিকাল ০৪:০০ - ০৬:০০', course: 'লাইভ প্রবলেম সলভিং ও কোড রিভিউ', instructor: 'সাপোর্ট টিম', room: 'Discord Voice & Video' }
+];
+
+export const mockAssignments = [
+  {
+    id: 1,
+    title: 'Assignment 08: E-commerce Product Filtering & Cart with React',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট',
+    deadline: '১০ অক্টোবর ২০২৬',
+    totalMarks: 50,
+    obtainedMarks: 48,
+    status: 'graded',
+    submissionDate: '০৬ অক্টোবর ২০২৬',
+    feedback: 'অসাধারণ কোড স্ট্রাকচার! কম্পোনেন্টগুলো খুব পরিচ্ছন্নভাবে ভাগ করা হয়েছে।'
+  },
+  {
+    id: 2,
+    title: 'Assignment 09: Node.js Express Auth API with JWT & MongoDB',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট',
+    deadline: '১৫ অক্টোবর ২০২৬',
+    totalMarks: 60,
+    obtainedMarks: null,
+    status: 'pending',
+    submissionDate: null,
+    feedback: null
+  },
+  {
+    id: 3,
+    title: 'Assignment 07: Responsive Dashboard Layout with Vanilla CSS',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট',
+    deadline: '২৮ সেপ্টেম্বর ২০২৬',
+    totalMarks: 50,
+    obtainedMarks: 50,
+    status: 'graded',
+    submissionDate: '২৭ সেপ্টেম্বর ২০২৬',
+    feedback: 'পারফেক্ট রেসপনসিভনেস ও কালার হারমোনি।'
+  }
+];
+
+export const mockExams = [
+  {
+    id: 1,
+    title: 'Mid-term Quiz: React Fundamentals & Hooks',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট',
+    date: '১২ অক্টোবর ২০২৬',
+    duration: '৪৫ মিনিট',
+    totalMarks: 50,
+    status: 'upcoming'
+  },
+  {
+    id: 2,
+    title: 'Quiz 01: Modern JavaScript (ES6+)',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট',
+    date: '১৫ সেপ্টেম্বর ২০২৬',
+    duration: '৩০ মিনিট',
+    totalMarks: 30,
+    obtainedMarks: 28,
+    status: 'completed'
+  }
+];
+
+export const mockResults = [
+  {
+    id: 1,
+    title: 'Quiz 01: Modern JavaScript (ES6+)',
+    examDate: '১৫ সেপ্টেম্বর ২০২৬',
+    totalMarks: 30,
+    obtainedMarks: 28,
+    percentage: '৯৩.৩%',
+    grade: 'A+',
+    remarks: 'চমৎকার পারফরম্যান্স'
+  },
+  {
+    id: 2,
+    title: 'Assignment 08: E-commerce Cart',
+    examDate: '০৬ অক্টোবর ২০২৬',
+    totalMarks: 50,
+    obtainedMarks: 48,
+    percentage: '৯৬%',
+    grade: 'A+',
+    remarks: 'কোড কোয়ালিটি চমৎকার'
+  },
+  {
+    id: 3,
+    title: 'Assignment 07: Responsive Dashboard',
+    examDate: '২৭ সেপ্টেম্বর ২০২৬',
+    totalMarks: 50,
+    obtainedMarks: 50,
+    percentage: '১০০%',
+    grade: 'A+',
+    remarks: 'শতভাগ নির্ভুল'
+  }
+];
+
+export const mockCertificates = [
+  {
+    id: 'BAIT-CERT-2026-902',
+    courseName: 'প্রফেশনাল গ্রাফিক ও ইউআই/ইউএক্স ডিজাইন',
+    issueDate: '৩০ সেপ্টেম্বর ২০২৬',
+    grade: 'A+',
+    credentialUrl: 'https://bait.academy/verify/BAIT-CERT-2026-902',
+    instructor: 'শারমিন সুলতানা',
+    status: 'Verified'
+  }
+];
+
+export const mockPayments = [
+  {
+    id: 'TRX-948102',
+    date: '১৫ জানুয়ারি ২০২৬',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    amount: 3500,
+    method: 'bKash (01711***214)',
+    status: 'পরিশোধিত',
+    type: '১ম কিস্তি'
+  },
+  {
+    id: 'TRX-948199',
+    date: '২০ ফেব্রুয়ারি ২০২৬',
+    course: 'ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট (MERN)',
+    amount: 3000,
+    method: 'Nagad (01711***214)',
+    status: 'পরিশোধিত',
+    type: '২য় কিস্তি'
+  }
+];
+
+export const mockNotifications = [
+  {
+    id: 1,
+    title: 'আজকের লাইভ ক্লাস শুরু রাত ৯:০০ টায়',
+    desc: 'Module 14: Redux Toolkit & RTK Query ক্লাসে যথাসময়ে যুক্ত হতে নির্দেশ দেওয়া হলো।',
+    time: '২ ঘণ্টা আগে',
+    unread: true,
+    type: 'class'
+  },
+  {
+    id: 2,
+    title: 'Assignment 08 এর ফলাফল প্রকাশিত হয়েছে',
+    desc: 'আপনার প্রাপ্ত নম্বর: ৪৮/৫০। ফিডব্যাক চেক করতে Results ট্যাবে প্রবেশ করুন।',
+    time: '১ দিন আগে',
+    unread: true,
+    type: 'assignment'
+  },
+  {
+    id: 3,
+    title: 'আসন্ন কুইজ পরীক্ষার সময়সূচি',
+    desc: '১২ই অক্টোবর ২০২৬ রাত ৮:৩০ টায় React Fundamentals এর ওপর অনলাইন কুইজ অনুষ্ঠিত হবে।',
+    time: '৩ দিন আগে',
+    unread: false,
+    type: 'exam'
+  }
+];
+
+export const mockSupportTickets = [
+  {
+    id: 'TICK-402',
+    subject: 'Redux Toolkit useSelector টাইপ ইস্যু সমাধান',
+    category: 'কারিগরি ও কোডিং সহায়তা',
+    status: 'সমাধানকৃত',
+    date: '০৪ অক্টোবর ২০২৬',
+    lastReply: 'সাপোর্ট ইন্সট্রাক্টর Google Meet-এ সমাধান করে দিয়েছেন।'
+  },
+  {
+    id: 'TICK-409',
+    subject: 'কোর্স সার্টিফিকেট ডাউনলোড সংক্রান্ত জিজ্ঞাসা',
+    category: 'সার্টিফিকেট ও প্রশাসনিক',
+    status: 'চলমান',
+    date: '০৬ অক্টোবর ২০২৬',
+    lastReply: 'আপনার আবেদনটি যাচাই করা হচ্ছে।'
   }
 ];

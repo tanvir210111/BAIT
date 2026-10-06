@@ -285,8 +285,8 @@ app.get('/api/people/:category/:slug', (req, res) => {
       LEFT JOIN divisions div ON p.division_id = div.id
       LEFT JOIN districts dist ON p.district_id = dist.id
       LEFT JOIN upazilas u ON p.upazila_id = u.id
-      WHERE p.category = ? AND p.slug = ?
-    `).get(category, slug);
+      WHERE p.category = ? AND (p.slug = ? OR p.slug LIKE ?)
+    `).get(category, slug, `${slug}%`);
 
     if (!person) return res.status(404).json({ error: 'তথ্য পাওয়া যায়নি।' });
 
