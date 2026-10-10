@@ -70,9 +70,9 @@ export default function Header({ onOpenSearch }) {
               </Link>
             </li>
             <li className="nav-item">
-              <a href="/#services" className="nav-link">
+              <Link to="/services" className={`nav-link ${location.pathname === '/services' || location.pathname === '/seba' || location.pathname === '/amader-sebasomuh' ? 'active' : ''}`}>
                 <span className="nav-link-inner">আমাদের সেবাসমূহ</span>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/jogajog" className={`nav-link ${location.pathname === '/jogajog' ? 'active' : ''}`}>

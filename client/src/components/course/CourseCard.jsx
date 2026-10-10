@@ -2,22 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Laptop, Award, ArrowRight } from 'lucide-react';
 
-export function getCoursePricing(course) {
-  const pricingMap = {
-    'web-development': { current: '৳৪,৯১৪', original: '৳৭,৮০০', discount: '৩৭% ছাড়' },
-    'graphic-design-ui-ux': { current: '৳৩,৪৫০', original: '৳৬,৯০০', discount: '৫০% ছাড়' },
-    'cyber-security': { current: '৳৫,৯৯৯', original: '৳৯,৯৯৯', discount: '৪০% ছাড়' },
-    'mobile-app-development': { current: '৳৫,৫০০', original: '৳১০,০০০', discount: '৪৫% ছাড়' },
-    'full-stack-web-development-mern': { current: '৳৬,৫০০', original: '৳১২,০০০', discount: '৪৫% ছাড়' },
-    'professional-graphic-ui-ux-design': { current: '৳৫,৫০০', original: '৳১০,০০০', discount: '৪৫% ছাড়' },
-    'python-data-analytics-machine-learning': { current: '৳৭,৫০০', original: '৳১৪,০০০', discount: '৪৬% ছাড়' },
-    'mobile-app-development-flutter-dart': { current: '৳৭,০০০', original: '৳১৩,০০০', discount: '৪৬% ছাড়' },
-  };
+export const pricingMap = {
+  'web-development': { current: '৳৪,৯১৪', original: '৳৭,৮০০', discount: '৩৭% ছাড়', numericCurrent: 4914 },
+  'graphic-design-ui-ux': { current: '৳৩,৪৫০', original: '৳৬,৯০০', discount: '৫০% ছাড়', numericCurrent: 3450 },
+  'cyber-security': { current: '৳৫,৯৯৯', original: '৳৯,৯৯৯', discount: '৪০% ছাড়', numericCurrent: 5999 },
+  'mobile-app-development': { current: '৳৫,৫০০', original: '৳১০,০০০', discount: '৪৫% ছাড়', numericCurrent: 5500 },
+  'full-stack-web-development-mern': { current: '৳৬,৫০০', original: '৳১২,০০০', discount: '৪৫% ছাড়', numericCurrent: 6500 },
+  'fullstack-freelancing-kushtia': { current: '৳৬,৫০০', original: '৳১২,০০০', discount: '৪৫% ছাড়', numericCurrent: 6500 },
+  'professional-graphic-ui-ux-design': { current: '৳৫,৫০০', original: '৳১০,০০০', discount: '৪৫% ছাড়', numericCurrent: 5500 },
+  'graphic-digital-art-barishal': { current: '৳৩,৪৫০', original: '৳৬,৯০০', discount: '৫০% ছাড়', numericCurrent: 3450 },
+  'python-data-analytics-machine-learning': { current: '৳৭,৫০০', original: '৳১৪,০০০', discount: '৪৬% ছাড়', numericCurrent: 7500 },
+  'python-data-analytics-bogura': { current: '৳৭,৫০০', original: '৳১৪,০০০', discount: '৪৬% ছাড়', numericCurrent: 7500 },
+  'cloud-security-sylhet': { current: '৳৫,৯৯৯', original: '৳৯,৯৯৯', discount: '৪০% ছাড়', numericCurrent: 5999 },
+  'mobile-app-development-flutter-dart': { current: '৳৭,০০০', original: '৳১৩,০০০', discount: '৪৬% ছাড়', numericCurrent: 7000 },
+  'frontend-app-dev-rangpur': { current: '৳৫,৫০০', original: '৳১০,০০০', discount: '৪৫% ছাড়', numericCurrent: 5500 },
+  'digital-marketing-seo-mymensingh': { current: '৳৪,৫০০', original: '৳৮,০০০', discount: '৪৪% ছাড়', numericCurrent: 4500 },
+};
 
+export function getCoursePricing(course) {
   if (course && course.slug && pricingMap[course.slug]) {
     return pricingMap[course.slug];
   }
-  return { current: '৳৪,৯১৪', original: '৳৭,৮০০', discount: '৩৭% ছাড়' };
+  return { current: '৳৪,৯১৪', original: '৳৭,৮০০', discount: '৩৭% ছাড়', numericCurrent: 4914 };
+}
+
+export function getCourseNumericPrice(course) {
+  const p = getCoursePricing(course);
+  return p?.numericCurrent || 4914;
 }
 
 export default function CourseCard({ course }) {

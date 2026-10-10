@@ -5,20 +5,23 @@ import StudentTopbar from '../components/student/StudentTopbar';
 import '../student.css';
 
 export default function StudentLayout() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <div className="student-layout-root">
+    <div className={`student-layout-root ${isCollapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Student Panel Sidebar */}
       <StudentSidebar 
-        isOpen={sidebarOpen} 
-        onClose={() => setSidebarOpen(false)} 
+        isOpen={isMobileOpen} 
+        onClose={() => setIsMobileOpen(false)}
+        isCollapsed={isCollapsed}
+        onToggleCollapse={() => setIsCollapsed(prev => !prev)}
       />
 
       {/* Main Student Workspace */}
       <div className="student-main-wrapper">
         <StudentTopbar 
-          onToggleSidebar={() => setSidebarOpen(prev => !prev)} 
+          onToggleMobileSidebar={() => setIsMobileOpen(prev => !prev)} 
         />
 
         <main className="student-content-container">

@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 1rem;
+  padding: 1rem;
   font-family: 'Hind Siliguri', 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   box-sizing: border-box;
   overflow: hidden;
@@ -611,19 +611,1213 @@
 }
 
 /* ==========================================================================
-   Responsive Adjustments
+   Responsive Adjustments & Split Layout
    ========================================================================== */
-@media (max-width: 480px) {
-  .auth-layout-root {
-    padding: 1.5rem 0.85rem;
-  }
 
-  .auth-clean-card {
-    padding: 2rem 1.35rem;
-    border-radius: 18px;
-  }
+/* Role Switcher Tab (Student / Client) */
+.auth-role-switcher {
+  display: flex;
+  align-items: center;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 4px;
+  margin-bottom: 1.25rem;
+  gap: 4px;
+}
 
-  .auth-title-text {
-    font-size: 1.35rem;
+.auth-role-tab {
+  flex: 1;
+  text-decoration: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 2px;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-role-tab-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.auth-role-tab:hover .auth-role-tab-inner {
+  color: #006a4e;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.auth-role-tab.active {
+  color: #ffffff;
+}
+
+.auth-role-tab.active .auth-role-tab-inner {
+  background: #006a4e;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 106, 78, 0.3);
+}
+
+/* Cross-Role Quick Switch Link */
+.auth-cross-role-link {
+  text-align: center;
+  margin-top: 14px;
+  padding-top: 10px;
+}
+
+.auth-cross-role-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #475569;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.25s ease;
+}
+
+.auth-cross-role-link a:hover {
+  color: #006a4e;
+  background: #EAF5F1;
+  border-color: #a7f3d0;
+  transform: translateY(-1.5px);
+}
+
+/* ==========================================================================
+   Two-Column Split Authentication Card (Matching Photorealistic Mockup)
+   ========================================================================== */
+.auth-split-wrapper {
+  width: 100%;
+  max-width: 1140px;
+  min-height: auto;
+  height: min(650px, calc(100vh - 2rem));
+  background: #ffffff;
+  border-radius: 24px;
+  border: 2px solid rgba(0, 106, 78, 0.45);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), 0 0 50px rgba(0, 106, 78, 0.25), 0 0 20px rgba(244, 42, 65, 0.15);
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.auth-split-wrapper.signup-split {
+  max-width: 1140px;
+  min-height: auto;
+  height: min(640px, calc(100vh - 2rem));
+  overflow: hidden;
+}
+
+/* Card Top Border Accent Line */
+.auth-split-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #006a4e 0%, #059669 45%, #f42a41 85%, #f42a41 100%);
+  z-index: 10;
+}
+
+/* LEFT COLUMN — FLOATING FORM AREA */
+.auth-form-column {
+  padding: 1.85rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.signup-split .auth-form-column {
+  padding: 1.25rem 2.2rem;
+  overflow: hidden;
+  justify-content: center;
+}
+
+/* Top bar: BAIT Brand Row + Language Dropdown */
+.auth-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.15rem;
+}
+
+.auth-brand-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: transform 0.25s ease;
+}
+
+.auth-brand-row:hover {
+  transform: translateY(-1.5px);
+}
+
+.auth-brand-row .auth-logo-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+.auth-brand-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+.auth-lang-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.auth-lang-selector:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #006a4e;
+}
+
+/* Title & Subtitle */
+.auth-card-titles {
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.auth-card-titles .auth-title-text {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.35rem 0;
+  line-height: 1.25;
+}
+
+.auth-card-titles .auth-subtitle-text {
+  font-size: 0.86rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Leading Icon Input Wrapper */
+.has-leading-icon {
+  position: relative;
+  width: 100%;
+}
+
+.auth-leading-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 3;
+  transition: color 0.2s ease;
+}
+
+.auth-input-wrapper:hover .auth-leading-icon,
+.auth-input-wrapper:focus-within .auth-leading-icon {
+  color: #006a4e;
+}
+
+.auth-input-wrapper.has-leading-icon .auth-input-field {
+  padding-left: 44px;
+}
+
+/* 2-Column Responsive Grid for paired inputs */
+.auth-input-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Compact Rules for 1-Page No-Scroll Signup Experience */
+.signup-split .auth-card-top-bar {
+  margin-bottom: 0.4rem;
+}
+
+.signup-split .auth-card-titles {
+  margin-bottom: 0.6rem;
+}
+
+.signup-split .auth-card-titles .auth-title-text {
+  font-size: 1.3rem;
+  margin-bottom: 0.1rem;
+}
+
+.signup-split .auth-card-titles .auth-subtitle-text {
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.signup-split .auth-input-group {
+  margin-bottom: 0.45rem;
+}
+
+.signup-split .auth-input-wrapper {
+  border-radius: 12px;
+  padding: 1.5px;
+}
+
+.signup-split .auth-input-field {
+  height: 38px;
+  font-size: 0.88rem;
+  padding: 0 12px 0 36px;
+  border-radius: 12px;
+}
+
+.signup-split .auth-leading-icon {
+  left: 12px;
+}
+
+.signup-split .auth-field-error {
+  font-size: 0.72rem;
+  margin-top: 0.2rem;
+}
+
+.signup-split .auth-terms-checkbox {
+  margin: 0.25rem 0 0.55rem 0;
+  font-size: 0.76rem;
+}
+
+.signup-split .auth-float-btn {
+  height: 40px;
+}
+
+.signup-split .auth-float-btn .auth-btn-inner {
+  font-size: 0.92rem;
+}
+
+.signup-split .auth-bottom-switch {
+  margin-top: 0.45rem;
+  margin-bottom: 0.45rem;
+  font-size: 0.8rem;
+}
+
+.signup-split .auth-role-banner-wrap {
+  margin-top: 0;
+}
+
+.signup-split .auth-role-card-banner {
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  border-radius: 12px;
+}
+
+.signup-split .role-banner-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+/* Submit Pill Button Arrow */
+.auth-btn-arrow {
+  transition: transform 0.25s ease;
+}
+
+.auth-float-btn:hover .auth-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Card Divider: অথবা */
+.auth-card-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0.95rem 0;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.auth-card-divider::before,
+.auth-card-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.auth-card-divider span {
+  padding: 0 12px;
+  font-weight: 600;
+}
+
+/* Social Login Buttons: Google & Facebook */
+.auth-social-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 1.05rem;
+}
+
+.auth-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
+}
+
+.auth-social-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.auth-social-btn svg {
+  flex-shrink: 0;
+}
+
+/* Bottom Switch to Sign Up/Login */
+.auth-bottom-switch {
+  text-align: center;
+  margin-bottom: 1.05rem;
+  font-size: 0.86rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.auth-switch-prompt {
+  color: #334155;
+  font-weight: 500;
+}
+
+.auth-bottom-switch-link {
+  color: #f42a41;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.auth-bottom-switch-link.auth-switch-action-highlight {
+  color: #f42a41;
+  font-weight: 700;
+}
+
+.auth-bottom-switch-link:hover,
+.auth-bottom-switch-link.auth-switch-action-highlight:hover {
+  color: #dc2626;
+  text-decoration: underline;
+  transform: translateY(-1px);
+}
+
+/* Bottom Role Banner Card */
+.auth-role-banner-wrap {
+  margin-top: 0.25rem;
+}
+
+.auth-role-card-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #eaf5f1;
+  border: 1px solid rgba(0, 106, 78, 0.2);
+  border-radius: 14px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #004d38;
+  font-weight: 700;
+  font-size: 0.84rem;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.auth-role-card-banner:hover {
+  background: #d4ece3;
+  border-color: #006a4e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 106, 78, 0.15);
+}
+
+.role-banner-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #006a4e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-banner-arrow {
+  color: #006a4e;
+  transition: transform 0.2s ease;
+}
+
+.auth-role-card-banner:hover .role-banner-arrow {
+  transform: translateX(4px);
+}
+
+/* RIGHT COLUMN — 3D VISUAL AREA */
+.auth-visual-column {
+  position: relative;
+  overflow: hidden;
+  background: #00120b;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
+  border-left: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+/* ==========================================================================
+   PHOTOREALISTIC 3D ANIMATED SCENE STYLES
+   ========================================================================== */
+.auth-3d-scene-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 580px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  user-select: none;
+}
+
+.auth-3d-spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  transition: background 0.15s ease;
+  mix-blend-mode: screen;
+}
+
+.auth-3d-interactive-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+/* Backdrop Image & Vignette */
+.auth-3d-image-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.auth-3d-photo-backdrop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.4s ease;
+}
+
+.auth-3d-photo-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 60% 45%, rgba(0, 0, 0, 0) 35%, rgba(0, 18, 11, 0.55) 100%);
+  pointer-events: none;
+}
+
+.auth-3d-overlay-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  z-index: 3;
+}
+
+/* ==========================================================================
+   SCENARIO 1: STUDENT LOGIN — ANIMATED PERSON & 3D FLOATING OBJECTS
+   ========================================================================== */
+.student-login-layer {
+  transform-style: preserve-3d;
+}
+
+/* Animated Person Life Layer */
+.person-animated-zone {
+  position: absolute;
+  right: 6%;
+  bottom: 4%;
+  width: 58%;
+  height: 80%;
+  pointer-events: none;
+  transform: translateZ(25px);
+}
+
+/* Dynamic laptop screen glow reflecting onto face/hoodie */
+.person-screen-reflection-glow {
+  position: absolute;
+  left: 18%;
+  top: 36%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.42) 0%, rgba(34, 197, 94, 0.18) 45%, transparent 75%);
+  filter: blur(28px);
+  animation: screenReflectionPulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes screenReflectionPulse {
+  0% { opacity: 0.45; transform: scale(0.95); }
+  50% { opacity: 0.95; transform: scale(1.1); }
+  100% { opacity: 0.55; transform: scale(1); }
+}
+
+/* Keyboard typing finger animation & glow pulses */
+.person-typing-keyboard-glow {
+  position: absolute;
+  left: 24%;
+  bottom: 20%;
+  width: 130px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(52, 211, 153, 0.5) 0%, transparent 70%);
+  filter: blur(14px);
+  animation: typingGlowRipple 1.6s ease-in-out infinite;
+}
+
+@keyframes typingGlowRipple {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  35% { opacity: 0.9; transform: scale(1.12); }
+  70% { opacity: 0.5; transform: scale(1); }
+}
+
+/* Floating code sparkles emitting from laptop */
+.code-sparkle-stream {
+  position: absolute;
+  left: 22%;
+  top: 25%;
+  width: 140px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.code-sparkle {
+  position: absolute;
+  color: #34d399;
+  font-family: monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  opacity: 0;
+  text-shadow: 0 0 8px #34d399;
+  animation: sparkRise 4.2s infinite linear;
+}
+
+.code-sparkle.s1 { left: 10%; animation-delay: 0s; }
+.code-sparkle.s2 { left: 45%; animation-delay: 1.2s; }
+.code-sparkle.s3 { left: 20%; animation-delay: 2.2s; }
+.code-sparkle.s4 { left: 60%; animation-delay: 3.1s; }
+.code-sparkle.s5 { left: 35%; animation-delay: 1.8s; color: #f42a41; text-shadow: 0 0 8px #f42a41; }
+
+@keyframes sparkRise {
+  0% { opacity: 0; transform: translateY(20px) scale(0.7); }
+  25% { opacity: 0.95; }
+  75% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-70px) scale(1.15); }
+}
+
+/* Real CSS 3D Rotating Holographic Neon Cube */
+.cube-3d-wrapper {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 66px;
+  height: 66px;
+  perspective: 700px;
+  transform: translateZ(70px);
+  animation: cubeFloatBob 5s ease-in-out infinite;
+}
+
+@keyframes cubeFloatBob {
+  0%, 100% { transform: translateZ(70px) translateY(0); }
+  50% { transform: translateZ(70px) translateY(-10px); }
+}
+
+.cube-3d-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: rotateCube3D 11s infinite linear;
+}
+
+@keyframes rotateCube3D {
+  0% { transform: rotateX(15deg) rotateY(0deg); }
+  100% { transform: rotateX(15deg) rotateY(360deg); }
+}
+
+.cube-face {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  background: rgba(0, 106, 78, 0.45);
+  border: 1.5px solid #34d399;
+  box-shadow: 0 0 18px rgba(52, 211, 153, 0.6), inset 0 0 14px rgba(0, 106, 78, 0.7);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.cube-face.face-front  { transform: translateZ(33px); }
+.cube-face.face-back   { transform: rotateY(180deg) translateZ(33px); }
+.cube-face.face-right  { transform: rotateY(90deg) translateZ(33px); }
+.cube-face.face-left   { transform: rotateY(-90deg) translateZ(33px); }
+.cube-face.face-top    { transform: rotateX(90deg) translateZ(33px); }
+.cube-face.face-bottom { transform: rotateX(-90deg) translateZ(33px); }
+
+.cube-code-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #a7f3d0;
+  text-shadow: 0 0 10px #34d399;
+}
+
+.cube-code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+}
+
+/* Floating 3D "Learn Build Grow" Interactive Button */
+.learn-build-grow-pill-3d {
+  position: absolute;
+  left: 22%;
+  top: 30%;
+  background: rgba(0, 48, 32, 0.82);
+  border: 1.5px solid #34d399;
+  border-radius: 14px;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(12px);
+  transform: translateZ(55px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 20px rgba(52, 211, 153, 0.35);
+  animation: floatHoloPill 5s ease-in-out infinite 0.4s;
+}
+
+.pill-play-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #006a4e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #34d399;
+}
+
+.pill-text-col {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pill-title { color: #34d399; }
+.pill-mid { color: #ffffff; }
+.pill-sub { color: #a7f3d0; }
+
+/* Floating 3D Holographic Checklist Card */
+.holographic-card-3d {
+  position: absolute;
+  top: 9%;
+  right: 7%;
+  background: rgba(0, 36, 25, 0.82);
+  border: 1.5px solid rgba(52, 211, 153, 0.6);
+  border-radius: 16px;
+  padding: 16px 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(52, 211, 153, 0.3);
+  transform: translateZ(60px);
+  animation: floatHoloCard 6s ease-in-out infinite;
+}
+
+@keyframes floatHoloCard {
+  0%, 100% { transform: translateZ(60px) translateY(0); }
+  50% { transform: translateZ(60px) translateY(-8px); }
+}
+
+.holo-card-glow-bar {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #34d399, transparent);
+}
+
+.holo-checklist-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.holo-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #f8fafc;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.holo-check-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid #34d399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #34d399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.4);
+}
+
+/* Floating 3D Bengali Typography with Red Neon Swoosh */
+.typography-3d-block {
+  position: absolute;
+  left: 8%;
+  top: 48%;
+  transform: translateZ(48px);
+  pointer-events: none;
+}
+
+.holo-headline {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9), 0 0 20px rgba(52, 211, 153, 0.4);
+  line-height: 1.3;
+  margin: 0 0 8px 0;
+  font-family: 'Hind Siliguri', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.holo-red-swoosh-line {
+  width: 90px;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #f42a41 0%, rgba(244, 42, 65, 0.2) 100%);
+  box-shadow: 0 0 12px #f42a41;
+}
+
+/* ==========================================================================
+   SCENARIO 2: STUDENT SIGNUP — ACADEMY WORKSTATION 3D
+   ========================================================================== */
+.student-signup-layer {
+  transform-style: preserve-3d;
+}
+
+.desk-lamp-ambient-glow {
+  position: absolute;
+  right: 18%;
+  top: 12%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(245, 158, 11, 0.15) 50%, transparent 75%);
+  filter: blur(35px);
+  animation: lampPulse 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes lampPulse {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+.laptop-video-play-pulse {
+  position: absolute;
+  left: 45%;
+  top: 52%;
+  width: 60px;
+  height: 60px;
+  transform: translate(-50%, -50%) translateZ(40px);
+  pointer-events: none;
+}
+
+.play-icon-center {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 106, 78, 0.9);
+  border: 2px solid #34d399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px #34d399;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.play-ripple-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(52, 211, 153, 0.6);
+  border-radius: 50%;
+  animation: rippleWave 2.5s infinite;
+}
+
+.play-ripple-ring.ring-2 {
+  animation-delay: 1.25s;
+}
+
+@keyframes rippleWave {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.title-student-signup {
+  top: 10%;
+  left: 6%;
+  max-width: 240px;
+}
+
+.title-student-signup .holo-headline {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.student-signup-person-zone .person-screen-reflection-glow {
+  left: 44%;
+  bottom: 24%;
+  width: 140px;
+  height: 90px;
+}
+
+.student-signup-person-zone .person-typing-keyboard-glow {
+  left: 46%;
+  bottom: 18%;
+}
+
+.student-signup-code-stream {
+  left: 54%;
+  bottom: 28%;
+}
+
+.holo-floating-badge {
+  position: absolute;
+  bottom: 12%;
+  right: 8%;
+  background: rgba(0, 48, 32, 0.85);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a7f3d0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  transform: translateZ(45px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.live-dot-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: pulsarGlow 1.8s infinite;
+}
+
+/* ==========================================================================
+   SCENARIO 3: CLIENT LOGIN — EXECUTIVE BOARDROOM 3D
+   ========================================================================== */
+.client-login-layer {
+  transform-style: preserve-3d;
+}
+
+.dashboard-live-data-glow {
+  position: absolute;
+  left: 46%;
+  top: 54%;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 40px;
+  transform: translateZ(35px);
+  pointer-events: none;
+}
+
+.data-bar {
+  width: 6px;
+  border-radius: 3px;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: dataBarPulse 1.8s ease-in-out infinite alternate;
+}
+
+.data-bar.b1 { height: 40%; animation-delay: 0.1s; }
+.data-bar.b2 { height: 75%; animation-delay: 0.3s; }
+.data-bar.b3 { height: 55%; animation-delay: 0.5s; }
+.data-bar.b4 { height: 90%; animation-delay: 0.2s; }
+
+@keyframes dataBarPulse {
+  0% { transform: scaleY(0.7); opacity: 0.6; }
+  100% { transform: scaleY(1.1); opacity: 1; }
+}
+
+.holo-services-stack-3d {
+  position: absolute;
+  top: 10%;
+  right: 7%;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transform: translateZ(55px);
+}
+
+.holo-service-pill {
+  background: rgba(0, 36, 25, 0.82);
+  border: 1.2px solid rgba(52, 211, 153, 0.5);
+  border-radius: 12px;
+  padding: 9px 15px;
+  color: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: floatHoloPill 5s ease-in-out infinite;
+}
+
+.holo-service-pill.p1 { animation-delay: 0s; }
+.holo-service-pill.p2 { animation-delay: 0.4s; }
+.holo-service-pill.p3 { animation-delay: 0.8s; }
+.holo-service-pill.p4 { animation-delay: 1.2s; }
+
+@keyframes floatHoloPill {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.srv-icon {
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.title-client-login {
+  top: 11%;
+  left: 8%;
+}
+
+/* ==========================================================================
+   SCENARIO 4: CLIENT SIGNUP — MODERN AGENCY STUDIO 3D
+   ========================================================================== */
+.client-signup-layer {
+  transform-style: preserve-3d;
+}
+
+.bait-sculpture-glow-zone {
+  position: absolute;
+  right: 24%;
+  bottom: 18%;
+  width: 140px;
+  height: 100px;
+  pointer-events: none;
+  transform: translateZ(35px);
+}
+
+.sculpture-radial-glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.45) 0%, rgba(244, 42, 65, 0.2) 50%, transparent 75%);
+  filter: blur(20px);
+  animation: sculptureBreathe 3s ease-in-out infinite alternate;
+}
+
+@keyframes sculptureBreathe {
+  0% { opacity: 0.5; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+.title-client-signup {
+  top: 10%;
+  left: 6%;
+  max-width: 250px;
+}
+
+.title-client-signup .holo-headline {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.client-signup-person-zone .person-screen-reflection-glow {
+  left: 54%;
+  bottom: 22%;
+  width: 140px;
+  height: 90px;
+}
+
+.client-signup-person-zone .person-typing-keyboard-glow {
+  left: 56%;
+  bottom: 16%;
+}
+
+/* Bottom 3D Ecosystem Tag */
+.auth-3d-bottom-tag {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(40px);
+  background: rgba(0, 24, 16, 0.75);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  border-radius: 9999px;
+  padding: 4px 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #cbd5e1;
+  font-size: 0.74rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.depth-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px #34d399;
+  animation: pulsarGlow 1.8s infinite;
+}
+
+@keyframes pulsarGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==========================================================================
+   Reduced Motion Support
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .auth-3d-interactive-stage,
+  .cube-3d-box,
+  .cube-3d-wrapper,
+  .holographic-card-3d,
+  .learn-build-grow-pill-3d,
+  .holo-service-pill,
+  .person-screen-reflection-glow,
+  .person-typing-keyboard-glow,
+  .code-sparkle {
+    animation: none !important;
+    transform: none !important;
   }
 }
+
+/* ==========================================================================
+   Responsive Rules
+   ========================================================================== */
+@media (max-width: 992px) {
+  .auth-split-wrapper {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    border-radius: 22px;
+  }
+
+  .auth-visual-column {
+    display: none; /* Focus fully on the accessible Form on small screens */
+  }
+
+  .auth-form-column {
+    padding: 2.25rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-layout-root {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .auth-split-wrapper {
+    border-radius: 18px;
+    border-width: 1.5px;
+  }
+
+  .auth-form-column {
+    padding: 1.85rem 1.25rem;
+  }
+
+  .auth-card-titles .auth-title-text {
+    font-size: 1.35rem;
+  }
+
+  .auth-social-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

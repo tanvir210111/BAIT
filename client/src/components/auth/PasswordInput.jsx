@@ -11,12 +11,14 @@ export default function PasswordInput({
   hasError = false,
   autoComplete = 'current-password',
   disabled = false,
+  icon: LeadingIcon,
   'aria-describedby': ariaDescribedby
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="auth-input-wrapper">
+    <div className={`auth-input-wrapper ${LeadingIcon ? 'has-leading-icon' : ''}`}>
+      {LeadingIcon && <LeadingIcon size={17} className="auth-leading-icon" />}
       <input 
         type={showPassword ? 'text' : 'password'}
         name={name}

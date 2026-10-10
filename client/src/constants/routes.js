@@ -5,6 +5,7 @@ export const ROUTES = {
   ABOUT: '/amader-somporke',
   COURSES: '/course',
   COURSE_DETAILS: (slug = ':slug') => `/course/${slug}`,
+  SERVICES: '/services',
   INSTRUCTORS: '/instructor',
   INSTRUCTOR_PROFILE: (slug = ':slug') => `/instructor/${slug}`,
   STUDENTS: '/student',
@@ -22,6 +23,10 @@ export const ROUTES = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   REGISTER: '/register',
+  STUDENT_LOGIN: '/student/login',
+  STUDENT_SIGNUP: '/student/signup',
+  CLIENT_LOGIN: '/client/login',
+  CLIENT_SIGNUP: '/client/signup',
   MY_PROFILE: '/my-profile',
 
   // Student Panel Routes
@@ -41,6 +46,18 @@ export const ROUTES = {
     SUPPORT: '/student/support',
     PROFILE: '/student/profile',
     SETTINGS: '/student/settings',
+  },
+
+  // Client Panel Routes
+  CLIENT: {
+    ROOT: '/client',
+    DASHBOARD: '/client/dashboard',
+    PROJECTS: '/client/projects',
+    REQUEST_PROJECT: '/client/request-project',
+    INVOICES: '/client/invoices',
+    SERVICES: '/client/services',
+    SUPPORT: '/client/support',
+    SETTINGS: '/client/settings',
   }
 };
 

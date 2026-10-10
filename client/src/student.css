@@ -1,18 +1,75 @@
 /* ============================================================
-   STUDENT PANEL LAYOUT & COMPONENT STYLES
+   BAIT STUDENT PANEL — REFINED PREMIUM LMS DESIGN SYSTEM
+   Brand Palette:
+   - Primary Green: #006A4E
+   - Dark Green:    #003F2E
+   - Accent Red:    #F42A41 (Strictly for urgent alerts/dots)
+   - Background:    #F7FAF8 (Clean, airy light green-tinted canvas)
+   - Surface:       #FFFFFF (Crisp white cards)
+   - Subtle Border: #E6EFEA
    ============================================================ */
+
+:root {
+  /* Core brand tokens */
+  --student-primary: #006A4E;
+  --student-primary-dark: #003F2E;
+  --student-primary-light: #059669;
+  --student-primary-subtle: #EBF5F0;
+  --student-accent-red: #F42A41;
+  --student-accent-amber: #D97706;
+  --student-accent-amber-subtle: #FEF3C7;
+  
+  /* Surfaces & canvas */
+  --student-bg: #F7FAF8;
+  --student-surface: #FFFFFF;
+  --student-surface-hover: #F8FAF9;
+  --student-border: #E6EFEA;
+  --student-border-hover: #D1E3D8;
+  
+  /* Text typography */
+  --student-text: #0F172A;
+  --student-text-secondary: #334155;
+  --student-text-muted: #64748B;
+  --student-text-light: #94A3B8;
+  
+  /* Border radius */
+  --student-radius-sm: 8px;
+  --student-radius-md: 10px;
+  --student-radius-lg: 14px;
+  --student-radius-xl: 18px;
+  
+  /* Restrained, elegant shadows */
+  --student-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --student-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+  --student-shadow-md: 0 4px 14px rgba(0, 63, 46, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+  --student-shadow-lg: 0 12px 28px rgba(0, 63, 46, 0.06);
+
+  /* Compatibility aliases for subcomponents */
+  --primary: #006A4E;
+  --primary-dark: #003F2E;
+  --primary-light: #059669;
+  --accent-red: #F42A41;
+  --text-muted: #64748B;
+}
+
+/* Base Student Layout Root */
 .student-layout-root {
   display: flex;
   min-height: 100vh;
-  background-color: #f8fafc;
-  color: #1e293b;
+  background-color: var(--student-bg);
+  color: var(--student-text);
   font-family: 'Hind Siliguri', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ============================================================
+   1. SIDEBAR (Clean White / Light Green Aesthetic)
+   ============================================================ */
 .student-sidebar {
-  width: 270px;
-  background-color: #0f172a;
-  color: #94a3b8;
+  width: 260px;
+  background-color: #FFFFFF;
+  border-right: 1px solid var(--student-border);
+  color: var(--student-text-secondary);
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -20,58 +77,121 @@
   bottom: 0;
   left: 0;
   z-index: 100;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Desktop Collapsed Sidebar State */
+.student-layout-root.sidebar-collapsed .student-sidebar {
+  width: 76px;
 }
 
 .student-sidebar-brand {
-  padding: 1.25rem 1.5rem;
+  height: 66px;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--student-border);
+  background: #FFFFFF;
 }
 
-.student-sidebar-brand a {
+.student-brand-link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  min-width: 0;
 }
 
-.student-sidebar-brand .brand-logo-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #006a4e 0%, #059669 100%);
+.student-brand-logo-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--student-radius-md);
+  background: linear-gradient(135deg, var(--student-primary-dark) 0%, var(--student-primary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  color: #ffffff;
-  font-size: 1.25rem;
-  box-shadow: 0 4px 12px rgba(0, 106, 78, 0.35);
+  color: #FFFFFF;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 8px rgba(0, 106, 78, 0.22);
+  flex-shrink: 0;
 }
 
-.student-sidebar-brand .brand-title {
-  font-size: 1.15rem;
+.student-brand-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: opacity 0.2s ease, width 0.2s ease;
+  white-space: nowrap;
+}
+
+.student-layout-root.sidebar-collapsed .student-brand-info {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.student-brand-title {
+  font-size: 1.02rem;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--student-primary-dark);
+  letter-spacing: 0.3px;
   line-height: 1.2;
 }
 
-.student-sidebar-brand .brand-badge {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #10b981;
-  font-weight: 700;
+.student-brand-subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--student-primary);
+  letter-spacing: 0.2px;
 }
 
+.student-sidebar-collapse-toggle {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--student-radius-sm);
+  border: 1px solid var(--student-border);
+  background: var(--student-surface);
+  color: var(--student-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.student-sidebar-collapse-toggle:hover {
+  background: var(--student-primary-subtle);
+  color: var(--student-primary);
+  border-color: var(--student-border-hover);
+}
+
+.student-sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--student-text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--student-radius-sm);
+}
+
+.student-sidebar-close-btn:hover {
+  background: #F1F5F9;
+  color: var(--student-text);
+}
+
+/* Sidebar Navigation Items */
 .student-sidebar-nav {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 0.85rem;
+  overflow-x: hidden;
+  padding: 0.9rem 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -82,7 +202,7 @@
 }
 
 .student-sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: #E2E8F0;
   border-radius: 4px;
 }
 
@@ -90,38 +210,61 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  padding: 0.65rem 0.95rem;
-  border-radius: 8px;
-  color: #94a3b8;
-  font-size: 0.92rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--student-radius-md);
+  color: var(--student-text-secondary);
+  font-size: 0.91rem;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   position: relative;
+  white-space: nowrap;
 }
 
 .student-nav-item:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--student-primary);
+  background-color: var(--student-primary-subtle);
 }
 
 .student-nav-item.active {
-  background: linear-gradient(90deg, rgba(0, 106, 78, 0.25) 0%, rgba(0, 106, 78, 0.08) 100%);
-  color: #34d399;
-  font-weight: 600;
-  border-left: 3px solid #10b981;
+  background: var(--student-primary-subtle);
+  color: var(--student-primary);
+  font-weight: 700;
+  border-left: 3.5px solid var(--student-primary);
+  padding-left: calc(0.85rem - 3.5px);
 }
 
-.student-nav-item.active svg {
-  color: #34d399;
+.student-nav-icon {
+  flex-shrink: 0;
+  color: inherit;
+  transition: transform 0.15s ease;
 }
 
+.student-nav-item:hover .student-nav-icon {
+  transform: scale(1.05);
+}
+
+.student-nav-label {
+  transition: opacity 0.2s ease, width 0.2s ease;
+}
+
+.student-layout-root.sidebar-collapsed .student-nav-label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  display: none;
+}
+
+.student-layout-root.sidebar-collapsed .student-nav-item {
+  justify-content: center;
+  padding: 0.6rem 0;
+}
+
+/* Sidebar Footer (Logout) */
 .student-sidebar-footer {
-  padding: 1rem 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--student-border);
+  background: #FFFFFF;
 }
 
 .student-logout-btn {
@@ -129,39 +272,1510 @@
   align-items: center;
   gap: 0.75rem;
   width: 100%;
-  padding: 0.65rem 0.95rem;
-  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--student-radius-md);
   background: transparent;
-  border: none;
-  color: #f87171;
-  font-size: 0.9rem;
+  border: 1px solid transparent;
+  color: var(--student-text-secondary);
+  font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .student-logout-btn:hover {
-  background: rgba(239, 68, 68, 0.12);
-  color: #ef4444;
+  background: #FEF2F2;
+  border-color: #FEE2E2;
+  color: var(--student-accent-red);
 }
 
-/* Student Main Wrapper */
+.student-layout-root.sidebar-collapsed .student-logout-btn {
+  justify-content: center;
+  padding: 0.6rem 0;
+}
+
+.student-layout-root.sidebar-collapsed .student-logout-text {
+  display: none;
+}
+
+/* ============================================================
+   2. TOPBAR & MAIN WRAPPER
+   ============================================================ */
 .student-main-wrapper {
   flex: 1;
-  margin-left: 270px;
+  margin-left: 260px;
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 100vh;
+  transition: margin-left 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Student Topbar */
+.student-layout-root.sidebar-collapsed .student-main-wrapper {
+  margin-left: 76px;
+}
+
 .student-topbar {
-  height: 68px;
+  height: 66px;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--student-border);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.student-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.student-hamburger-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--student-border);
+  color: var(--student-text-secondary);
+  cursor: pointer;
+  padding: 7px;
+  border-radius: var(--student-radius-sm);
+  background: #FFFFFF;
+}
+
+.student-topbar-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--student-text-muted);
+}
+
+.student-topbar-breadcrumb-current {
+  font-weight: 700;
+  color: var(--student-primary-dark);
+  font-size: 0.94rem;
+}
+
+.student-topbar-greeting {
+  font-size: 0.88rem;
+  color: var(--student-text-secondary);
+  border-left: 1px solid var(--student-border);
+  padding-left: 1rem;
+  margin-left: 0.25rem;
+}
+
+.student-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Return to website link */
+.student-return-web-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--student-primary);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--student-radius-sm);
+  border: 1px solid var(--student-border);
+  background: var(--student-surface);
+  transition: all 0.15s ease;
+}
+
+.student-return-web-link:hover {
+  background: var(--student-primary-subtle);
+  border-color: var(--student-border-hover);
+  color: var(--student-primary-dark);
+}
+
+/* Notification Button with Dot */
+.student-topbar-notif-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--student-radius-sm);
+  background: #FFFFFF;
+  border: 1px solid var(--student-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--student-text-secondary);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.student-topbar-notif-btn:hover {
+  background: var(--student-primary-subtle);
+  border-color: var(--student-border-hover);
+  color: var(--student-primary);
+}
+
+.student-notification-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--student-accent-red);
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+/* Student Avatar Profile Pill */
+.student-topbar-profile-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  padding: 3px 10px 3px 3px;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 1px solid var(--student-border);
+  transition: all 0.15s ease;
+}
+
+.student-topbar-profile-pill:hover {
+  background: var(--student-primary-subtle);
+  border-color: var(--student-border-hover);
+}
+
+.student-topbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--student-primary);
+}
+
+.student-topbar-avatar-placeholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--student-primary) 0%, var(--student-primary-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.student-topbar-user-meta {
+  text-align: left;
+  line-height: 1.25;
+}
+
+.student-topbar-user-name {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--student-text);
+}
+
+.student-topbar-user-role {
+  font-size: 0.7rem;
+  color: var(--student-text-muted);
+}
+
+/* Content Container */
+.student-content-container {
+  flex: 1;
+  padding: 1.75rem 2rem;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   3. WELCOME HERO SECTION (Refined Depth, Crisp Typography)
+   ============================================================ */
+.student-welcome-hero {
+  background: linear-gradient(135deg, #003627 0%, #004D38 55%, #005F45 100%);
+  border-radius: var(--student-radius-xl);
+  padding: 2rem 2.25rem;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 54, 39, 0.12);
+  position: relative;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.student-welcome-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(ellipse at 85% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.student-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+}
+
+.student-hero-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.65rem;
+}
+
+.student-hero-id-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #A7F3D0;
+  letter-spacing: 0.3px;
+}
+
+.student-hero-batch-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  background: rgba(244, 42, 65, 0.22);
+  border: 1px solid rgba(244, 42, 65, 0.35);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #FECACA;
+}
+
+.student-hero-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 0.45rem 0;
+  line-height: 1.3;
+}
+
+.student-hero-subtitle {
+  color: #E2E8F0;
+  font-size: 0.94rem;
+  margin: 0 0 1.35rem 0;
+  line-height: 1.6;
+  max-width: 530px;
+}
+
+.student-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Primary Hero Action Button */
+.student-hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  color: var(--student-primary-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 22px;
+  border-radius: var(--student-radius-md);
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.student-hero-btn-primary:hover {
+  background: #F8FAF9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+  color: var(--student-primary);
+}
+
+/* Secondary Hero Action Button */
+.student-hero-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: var(--student-radius-md);
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.15s ease;
+}
+
+.student-hero-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Refined Learning-Themed Visual on Hero Right */
+.student-hero-visual-wrapper {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.student-hero-visual-card {
+  width: 270px;
+  height: 170px;
+  border-radius: var(--student-radius-lg);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 26px rgba(0, 31, 23, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.student-hero-visual-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 31, 23, 0.35);
+}
+
+.student-hero-visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.student-hero-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 31, 23, 0.15) 0%, rgba(0, 31, 23, 0.65) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 12px;
+}
+
+.student-hero-floating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--student-primary-dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================
+   4. ACADEMIC OVERVIEW (4-STAT COMPACT CARDS)
+   ============================================================ */
+.student-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  margin-bottom: 1.75rem;
+}
+
+.student-stat-card {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: var(--student-radius-lg);
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  box-shadow: var(--student-shadow-sm);
+  transition: all 0.18s ease;
+}
+
+.student-stat-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--student-shadow-md);
+  border-color: var(--student-border-hover);
+}
+
+.stat-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--student-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon-green {
+  background: var(--student-primary-subtle);
+  color: var(--student-primary);
+}
+
+.stat-icon-emerald {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.stat-icon-amber {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.stat-icon-blue {
+  background: #EFF6FF;
+  color: #2563EB;
+}
+
+.stat-card-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.stat-card-title {
+  font-size: 0.82rem;
+  color: var(--student-text-muted);
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+
+.stat-card-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--student-text);
+  line-height: 1.2;
+}
+
+.stat-card-subtext {
+  font-size: 0.72rem;
+  color: var(--student-text-light);
+  margin-top: 1px;
+}
+
+/* ============================================================
+   5. DASHBOARD MAIN 2-COLUMN BALANCED GRID
+   ============================================================ */
+.student-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.student-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Section Header Bar */
+.student-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.75rem;
+}
+
+.student-section-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.student-section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--student-primary-dark);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.student-section-subtext {
+  font-size: 0.8rem;
+  color: var(--student-text-muted);
+  margin: 0;
+}
+
+.student-section-action-link {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--student-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.15s ease;
+}
+
+.student-section-action-link:hover {
+  color: var(--student-primary-dark);
+  text-decoration: underline;
+}
+
+/* Generic Student Surface Card */
+.student-card {
+  background: var(--student-surface);
+  border: 1px solid var(--student-border);
+  border-radius: var(--student-radius-lg);
+  box-shadow: var(--student-shadow-sm);
+  transition: all 0.18s ease;
+}
+
+.student-card:hover {
+  border-color: var(--student-border-hover);
+}
+
+/* ============================================================
+   C. CONTINUE LEARNING (Primary Learning Focus)
+   ============================================================ */
+.student-continue-card {
+  padding: 1.35rem;
+}
+
+.continue-card-body {
+  display: flex;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.continue-course-thumb {
+  width: 165px;
+  height: 110px;
+  border-radius: var(--student-radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--student-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.continue-course-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.continue-course-top {
+  margin-bottom: 0.5rem;
+}
+
+.continue-course-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  gap: 8px;
+}
+
+.continue-course-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--student-text);
+  margin: 0 0 0.35rem 0;
+  line-height: 1.35;
+}
+
+.continue-course-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--student-text-muted);
+  flex-wrap: wrap;
+}
+
+.continue-course-instructor {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  color: var(--student-text-secondary);
+}
+
+.continue-course-topic {
+  color: var(--student-text-muted);
+}
+
+/* Progress bar */
+.continue-progress-wrap {
+  margin: 0.65rem 0 0.85rem 0;
+}
+
+.continue-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.continue-progress-label {
+  color: var(--student-text-secondary);
+}
+
+.continue-progress-value {
+  color: var(--student-primary);
+  font-weight: 700;
+}
+
+.continue-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.continue-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--student-primary) 0%, var(--student-primary-light) 100%);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.continue-course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.continue-lessons-count {
+  font-size: 0.8rem;
+  color: var(--student-text-muted);
+}
+
+.continue-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--student-primary);
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: var(--student-radius-md);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.continue-action-btn:hover {
+  background: var(--student-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* CourseProgressCard component compatibility */
+.course-progress-card {
+  padding: 1.25rem;
+}
+
+/* ============================================================
+   D. UPCOMING CLASSES CARD
+   ============================================================ */
+.upcoming-class-widget,
+.upcoming-class-card {
+  padding: 1.35rem;
+  border-left: 4px solid var(--student-primary);
+}
+
+.upcoming-widget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+}
+
+.upcoming-widget-topic {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--student-text);
+  margin: 0 0 0.3rem 0;
+  line-height: 1.35;
+}
+
+.upcoming-widget-course {
+  font-size: 0.82rem;
+  color: var(--student-text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.upcoming-widget-schedule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--student-text-secondary);
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.upcoming-schedule-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--student-bg);
+  padding: 5px 10px;
+  border-radius: var(--student-radius-sm);
+  border: 1px solid var(--student-border);
+}
+
+.upcoming-join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 16px;
+  border-radius: var(--student-radius-md);
+  background: var(--student-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.upcoming-join-btn:hover {
+  background: var(--student-primary-dark);
+  box-shadow: 0 3px 10px rgba(0, 106, 78, 0.22);
+}
+
+/* ============================================================
+   E. ASSIGNMENTS & ASSESSMENTS
+   ============================================================ */
+.student-assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.student-assignment-item {
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.assignment-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.assignment-item-title {
+  font-size: 0.93rem;
+  font-weight: 700;
+  color: var(--student-text);
+  line-height: 1.35;
+}
+
+.assignment-item-meta {
+  font-size: 0.8rem;
+  color: var(--student-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Recent Assessment Results snippet */
+.assessment-results-card {
+  padding: 1.2rem 1.35rem;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #F1F5F9;
+  gap: 10px;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.result-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--student-text-secondary);
+}
+
+.result-meta {
+  font-size: 0.76rem;
+  color: var(--student-text-muted);
+  margin-top: 2px;
+}
+
+.result-grade-badge {
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+/* ============================================================
+   F. RECENT ANNOUNCEMENTS / NOTIFICATIONS
+   ============================================================ */
+.announcements-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.announcement-item,
+.notice-card {
+  padding: 1rem 1.2rem;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: all 0.15s ease;
+}
+
+.announcement-item.unread,
+.notice-card.notice-unread {
+  background: #FCFDFD;
+  border-left: 3.5px solid var(--student-primary);
+}
+
+.announcement-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--student-primary-subtle);
+  color: var(--student-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.announcement-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+  gap: 8px;
+}
+
+.announcement-title {
+  font-size: 0.91rem;
+  font-weight: 700;
+  color: var(--student-text);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.announcement-time {
+  font-size: 0.74rem;
+  color: var(--student-text-light);
+  white-space: nowrap;
+}
+
+.announcement-desc {
+  font-size: 0.82rem;
+  color: var(--student-text-muted);
+  margin: 3px 0 0 0;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   G. SUPPORT SHORTCUT CARD
+   ============================================================ */
+.support-shortcut-card {
+  background: #F2F9F5;
+  border: 1px solid #D1EAE0;
+  border-radius: var(--student-radius-lg);
+  padding: 1.35rem;
+  box-shadow: var(--student-shadow-xs);
+}
+
+.support-shortcut-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.45rem;
+}
+
+.support-shortcut-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--student-radius-md);
+  background: var(--student-primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.support-shortcut-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--student-primary-dark);
+  margin: 0;
+}
+
+.support-shortcut-desc {
+  font-size: 0.83rem;
+  color: #047857;
+  line-height: 1.55;
+  margin: 0 0 0.95rem 0;
+}
+
+.support-shortcut-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.support-shortcut-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: var(--student-radius-md);
+  background: var(--student-primary);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.support-shortcut-btn:hover {
+  background: var(--student-primary-dark);
+}
+
+.support-helpline-text {
+  font-size: 0.78rem;
+  color: #065F46;
+  text-align: center;
+}
+
+/* ============================================================
+   BADGES & UTILITIES (Cohesive and Reusable across Subpages)
+   ============================================================ */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.badge-teal {
+  background: var(--student-primary-subtle);
+  color: var(--student-primary);
+  border: 1px solid #C6E5D7;
+}
+
+.badge-amber {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.badge-red {
+  background: #FEE2E2;
+  color: var(--student-accent-red);
+  border: 1px solid #FECACA;
+}
+
+.badge-blue {
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+
+.badge-slate {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #E2E8F0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 8px 16px;
+  border-radius: var(--student-radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  border: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--student-primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--student-primary-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--student-border);
+  color: var(--student-text-secondary);
+}
+
+.btn-outline:hover {
+  background: var(--student-surface-hover);
+  border-color: var(--student-border-hover);
+  color: var(--student-primary);
+}
+
+/* Common Subpage Header */
+.student-page-header {
+  margin-bottom: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.student-page-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--student-primary-dark);
+  margin: 0 0 4px 0;
+  line-height: 1.25;
+}
+
+.student-page-subtitle {
+  font-size: 0.88rem;
+  color: var(--student-text-muted);
+  margin: 0;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--student-text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: var(--student-radius-sm);
+  border: 1px solid var(--student-border);
+  background: #FFFFFF;
+  color: var(--student-text);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--student-primary);
+  box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.1);
+}
+
+/* Modals */
+.student-modal-box {
+  background: #FFFFFF;
+  border-radius: var(--student-radius-lg);
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: var(--student-shadow-lg);
+  position: relative;
+}
+
+.search-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 31, 23, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (Desktop, Tablet, Mobile)
+   ============================================================ */
+@media (max-width: 1200px) {
+  .student-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .student-sidebar {
+    transform: translateX(-100%);
+    width: 280px !important;
+    box-shadow: 10px 0 30px rgba(0, 31, 23, 0.2);
+  }
+
+  .student-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .student-sidebar-close-btn {
+    display: block;
+  }
+
+  .student-sidebar-collapse-toggle {
+    display: none;
+  }
+
+  .student-main-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .student-hamburger-btn {
+    display: block;
+  }
+
+  /* Flatten and order hierarchically on tablet & mobile */
+  .student-dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .student-column {
+    display: contents;
+  }
+
+  .student-section-continue { order: 1; }
+  .student-section-upcoming { order: 2; }
+  .student-section-assignments { order: 3; }
+  .student-section-announcements { order: 4; }
+  .student-section-support { order: 5; }
+}
+
+@media (max-width: 768px) {
+  .student-content-container {
+    padding: 1.25rem 1rem;
+  }
+
+  .student-topbar {
+    padding: 0 1rem;
+    height: 60px;
+  }
+
+  .student-topbar-greeting {
+    display: none;
+  }
+
+  .student-welcome-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .student-hero-title {
+    font-size: 1.55rem;
+  }
+
+  .student-hero-visual-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .student-hero-visual-card {
+    width: 100%;
+    max-width: 320px;
+    height: 155px;
+  }
+
+  .continue-card-body {
+    flex-direction: column;
+  }
+
+  .continue-course-thumb {
+    width: 100%;
+    height: 140px;
+  }
+
+  .student-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+/* Accessibility: Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   UTOPIA DESIGN SYSTEM — EXACT PIXEL-PERFECT LMS DASHBOARD
+   ============================================================ */
+
+/* Utopia Base Overrides */
+.student-layout-root {
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1e293b;
+}
+
+.student-main-wrapper {
+  margin-left: 230px !important;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.student-layout-root.sidebar-collapsed .student-main-wrapper {
+  margin-left: 68px !important;
+}
+
+.student-content-container {
+  padding: 0 !important;
+  background-color: #f8fafc;
+}
+
+/* ============================================================
+   UTOPIA SIDEBAR (Deep Dark Navy)
+   ============================================================ */
+.utopia-sidebar {
+  width: 230px;
+  background-color: #0d1b2a;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.utopia-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.utopia-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.utopia-sidebar.collapsed {
+  width: 68px;
+}
+
+.utopia-sidebar-brand {
+  height: 64px;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.utopia-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.utopia-brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.utopia-brand-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.08em;
+  font-family: inherit;
+}
+
+.utopia-sidebar-collapse-toggle {
+  background: rgba(255, 255, 255, 0.07);
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.utopia-sidebar-collapse-toggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.utopia-sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.utopia-sidebar-nav {
+  flex: 1;
+  padding: 1.1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.utopia-nav-section {
+  margin-bottom: 1.15rem;
+}
+
+.utopia-nav-heading {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+}
+
+.utopia-nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.5rem 0.5rem 0.75rem;
+}
+
+.utopia-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.utopia-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.utopia-nav-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.utopia-nav-item.active {
+  background: #ffffff !important;
+  color: #0d1b2a !important;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.utopia-nav-icon {
+  flex-shrink: 0;
+}
+
+.utopia-nav-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.utopia-logout-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.utopia-logout-item:hover {
+  color: #f87171 !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+/* ============================================================
+   UTOPIA TOPBAR
+   ============================================================ */
+.utopia-topbar {
+  height: 64px;
   background: #ffffff;
   border-bottom: 1px solid #e2e8f0;
-  padding: 0 2rem;
+  padding: 0 2.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -170,148 +1784,1679 @@
   z-index: 90;
 }
 
-.student-topbar-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #0f172a;
+.utopia-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.student-topbar-actions {
+.utopia-hamburger-btn {
+  display: none;
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  color: #64748b;
+}
+
+.utopia-search-form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #f1f3f7;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  width: 320px;
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.utopia-search-form:focus-within {
+  background: #eef2f6;
+  box-shadow: 0 0 0 2px rgba(13, 27, 42, 0.08);
+}
+
+.utopia-search-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.utopia-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.88rem;
+  color: #1e293b;
+  width: 100%;
+}
+
+.utopia-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.utopia-topbar-right {
   display: flex;
   align-items: center;
   gap: 1.25rem;
 }
 
-.student-topbar-icon-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+.utopia-icon-btn {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1e293b;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.utopia-icon-btn:hover {
   background: #f1f5f9;
-  border: none;
+}
+
+.utopia-badge-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+}
+
+.utopia-avatar-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.utopia-avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #e2e8f0;
+  transition: transform 0.15s ease;
+}
+
+.utopia-avatar-link:hover .utopia-avatar-img {
+  transform: scale(1.05);
+}
+
+.utopia-avatar-fallback {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #475569;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.2s ease;
 }
 
-.student-topbar-icon-btn:hover {
+/* ============================================================
+   UTOPIA DASHBOARD LAYOUT (2 Columns)
+   ============================================================ */
+.utopia-dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 1.75rem;
+  padding: 1.5rem 2.25rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.utopia-main-column {
+  min-width: 0;
+}
+
+.utopia-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+/* GREETING BAR */
+.utopia-greeting-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.utopia-greeting-text {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.utopia-wave-emoji {
+  font-size: 1.4rem;
+}
+
+.utopia-greeting-heading {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.utopia-greeting-date {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* CLUB HERO BANNER */
+.utopia-banner-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.utopia-banner-content {
+  flex: 1;
+  max-width: 580px;
+}
+
+.utopia-banner-title {
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+}
+
+.utopia-banner-desc {
+  font-size: 0.84rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0 0 1.25rem 0;
+}
+
+.utopia-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0d1b2a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.utopia-banner-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+.utopia-banner-graphic {
+  width: 250px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.utopia-banner-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* SECTIONS HEADER */
+.utopia-section {
+  margin-bottom: 2rem;
+}
+
+.utopia-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.utopia-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.utopia-section-icon {
+  color: #0f172a;
+}
+
+.utopia-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.utopia-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #3b82f6;
+  text-decoration: none;
+  transition: gap 0.15s ease;
+}
+
+.utopia-view-all-link:hover {
+  gap: 0.35rem;
+  color: #1d4ed8;
+}
+
+/* ENROLLED COURSES 4 PASTEL CARDS */
+.utopia-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+.utopia-course-card {
+  border-radius: 12px;
+  padding: 1.25rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.utopia-course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Pastel Card Themes matching screenshot */
+.utopia-course-card.theme-purple {
+  background-color: #f5edfc;
+  border: 1px solid #e5d1f8;
+}
+
+.utopia-course-card.theme-yellow {
+  background-color: #fef5db;
+  border: 1px solid #fce3a4;
+}
+
+.utopia-course-card.theme-cyan {
+  background-color: #e2f5fc;
+  border: 1px solid #bde6f7;
+}
+
+.utopia-course-card.theme-green {
+  background-color: #e3f7eb;
+  border: 1px solid #bfeecd;
+}
+
+.utopia-course-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.65rem 0;
+  line-height: 1.35;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.utopia-course-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin-bottom: 0.75rem;
+}
+
+.utopia-course-desc {
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.45;
+  margin: 0 0 0.85rem 0;
+  height: 42px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.utopia-course-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 0.85rem;
+}
+
+.utopia-course-line {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: #334155;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.utopia-line-icon {
+  color: #475569;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+}
+
+.utopia-course-card-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.utopia-course-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.73rem;
+  color: #475569;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.utopia-course-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.utopia-course-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #0d1b2a;
+}
+
+.utopia-course-btn {
+  width: 100%;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #0d1b2a;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  box-sizing: border-box;
+}
+
+.utopia-course-btn:hover {
+  background: #1b2a3d;
+}
+
+/* ============================================================
+   EXAM BOARD TABLE
+   ============================================================ */
+.utopia-table-container {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.utopia-exam-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.utopia-exam-table thead tr {
+  border-bottom: 1px solid #edf2f7;
+}
+
+.utopia-exam-table th {
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  background: #ffffff;
+}
+
+.utopia-exam-table th:first-child {
+  border-top-left-radius: 12px;
+  padding-left: 1.25rem;
+}
+
+.utopia-exam-table th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sortable-th:hover {
+  color: #0f172a;
+}
+
+.sort-arrows {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-left: 0.25rem;
+}
+
+.utopia-exam-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.12s ease;
+}
+
+.utopia-exam-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.utopia-exam-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.utopia-exam-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.83rem;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.cell-exam-name {
+  font-weight: 600;
+  color: #0f172a !important;
+  padding-left: 1.25rem !important;
+}
+
+.cell-course {
+  font-weight: 500;
+  color: #475569 !important;
+}
+
+.cell-date, .cell-time, .cell-location {
+  color: #475569 !important;
+}
+
+/* Status Badges */
+.utopia-status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.utopia-status-badge.badge-completed {
+  background-color: #e6f9ee;
+  color: #16a34a;
+}
+
+.utopia-status-badge.badge-upcoming {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+/* Row Action 3-dots */
+.cell-actions {
+  text-align: right;
+  padding-right: 1.25rem !important;
+}
+
+.utopia-row-menu-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.utopia-row-menu-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+
+.utopia-row-menu-btn:hover {
   background: #e2e8f0;
   color: #0f172a;
 }
 
-.student-topbar-badge {
+.utopia-dropdown-menu {
   position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: #f42a41;
-  color: #ffffff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #ffffff;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  padding: 0.35rem 0;
+  z-index: 50;
+  width: 140px;
 }
 
-.student-topbar-user {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.dropdown-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  color: #334155;
+  background: none;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
-  padding: 0.35rem 0.65rem;
+  transition: background 0.1s ease;
+}
+
+.dropdown-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* ============================================================
+   RIGHT COLUMN WIDGETS
+   ============================================================ */
+.utopia-widget-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* SEMESTER PROGRESS */
+.utopia-semester-widget {
+  padding: 1rem 1.25rem;
+}
+
+.utopia-semester-header {
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+.utopia-progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
   border-radius: 10px;
-  transition: background 0.2s ease;
+  overflow: hidden;
 }
 
-.student-topbar-user:hover {
-  background: #f8fafc;
+.utopia-progress-bar-fill {
+  height: 100%;
+  background: #0d1b2a;
+  border-radius: 10px;
+  transition: width 0.3s ease;
 }
 
-.student-topbar-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #006a4e;
-  color: #ffffff;
+/* INTERACTIVE CALENDAR WIDGET */
+.utopia-calendar-widget {
+  padding: 1.15rem;
+}
+
+.utopia-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.cal-month-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.cal-nav-btn {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 0.95rem;
 }
 
-.student-topbar-user-info {
+.cal-nav-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.utopia-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.utopia-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.cal-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #475569;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.12s ease;
+}
+
+.cal-day-cell:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.cal-day-cell.selected {
+  background: #0d1b2a !important;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.cal-day-cell.has-event:not(.selected)::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #3b82f6;
+}
+
+/* HOMEWORKS WIDGET */
+.utopia-homeworks-widget {
+  padding: 1.15rem;
+}
+
+.utopia-homeworks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.utopia-hw-card {
+  border: 1px solid #edf2f7;
+  border-radius: 9px;
+  padding: 0.85rem 0.95rem;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
 }
 
-.student-topbar-user-name {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #1e293b;
-  line-height: 1.2;
+.utopia-hw-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
 }
 
-.student-topbar-user-role {
+.utopia-hw-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.utopia-hw-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.badge-homework-orange {
+  border: 1px solid #fed7aa;
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.badge-homework-green {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.badge-homework-purple {
+  border: 1px solid #e9d5ff;
+  background: #faf5ff;
+  color: #9333ea;
+}
+
+.badge-homework-red {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.utopia-hw-assignment {
+  font-size: 0.74rem;
+  color: #64748b;
+  margin-bottom: 0.25rem;
+}
+
+.utopia-hw-due {
   font-size: 0.72rem;
+  color: #475569;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+
+.utopia-hw-progress-track {
+  width: 100%;
+  height: 3px;
+  background: #f1f5f9;
+  border-radius: 3px;
+  position: relative;
+}
+
+.utopia-hw-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+}
+
+.utopia-hw-dot {
+  position: absolute;
+  right: -3px;
+  top: -2.5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+}
+
+/* CLUB MODAL POPUP */
+.utopia-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 1.5rem;
+}
+
+.utopia-modal-box {
+  background: #ffffff;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.utopia-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.utopia-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.utopia-modal-title h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.utopia-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
   color: #64748b;
 }
 
-/* Student Content Container */
-.student-content-container {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
+.utopia-modal-body {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.88rem;
+  color: #475569;
 }
 
-/* Mobile Sidebar Overlay */
-.student-sidebar-overlay {
-  display: none;
+.utopia-modal-clubs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
-@media (max-width: 1024px) {
-  .student-sidebar {
+.modal-club-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.modal-club-item strong {
+  color: #0f172a;
+  font-size: 0.88rem;
+}
+
+.modal-club-item span {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.utopia-modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  background: #f8fafc;
+}
+
+/* ============================================================
+   RESPONSIVENESS FOR UTOPIA DASHBOARD
+   ============================================================ */
+@media (max-width: 1280px) {
+  .utopia-courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1080px) {
+  .utopia-dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .utopia-sidebar {
     transform: translateX(-100%);
   }
 
-  .student-sidebar.open {
+  .utopia-sidebar.open {
     transform: translateX(0);
   }
 
-  .student-main-wrapper {
-    margin-left: 0;
-  }
-
-  .student-sidebar-overlay {
+  .utopia-sidebar-close-btn {
     display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.5);
-    z-index: 95;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
   }
 
-  .student-sidebar-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+  .student-main-wrapper {
+    margin-left: 0 !important;
   }
 
-  .student-content-container {
-    padding: 1.25rem;
+  .utopia-hamburger-btn {
+    display: block;
   }
 
-  .student-topbar {
-    padding: 0 1.25rem;
+  .utopia-topbar {
+    padding: 0 1rem;
+  }
+
+  .utopia-search-form {
+    width: 180px;
+  }
+
+  .utopia-dashboard-layout {
+    padding: 1rem;
+  }
+
+  .utopia-banner-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .utopia-banner-graphic {
+    width: 100%;
+    height: 120px;
+  }
+
+  .utopia-courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .utopia-table-container {
+    overflow-x: auto;
   }
 }
+
+/* ============================================================
+   UTOPIA SUBPAGE & COMPONENT DESIGN SYSTEM
+   ============================================================ */
+.utopia-page-container {
+  padding: 1.5rem;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.18s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.utopia-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.utopia-page-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0d1b2a;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.utopia-page-subtitle {
+  font-size: 0.84rem;
+  color: #64748b;
+  margin: 4px 0 0 0;
+}
+
+.utopia-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  padding: 1.25rem;
+}
+
+.utopia-filter-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.utopia-day-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.utopia-day-pill {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.utopia-day-pill:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.utopia-day-pill.active {
+  background: #0d1b2a;
+  color: #ffffff;
+  border-color: #0d1b2a;
+}
+
+.utopia-day-badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.utopia-table-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.utopia-table-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.8rem;
+  color: #0f172a;
+  width: 180px;
+}
+
+.utopia-btn-primary {
+  background: #0d1b2a;
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s ease;
+}
+
+.utopia-btn-primary:hover {
+  background: #1b2a3d;
+}
+
+.utopia-btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.utopia-btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.utopia-btn-sm {
+  background: #0d1b2a;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.utopia-btn-sm:hover {
+  background: #1b2a3d;
+}
+
+.utopia-btn-outline-sm {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.12s ease;
+}
+
+.utopia-btn-outline-sm:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.badge-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.badge-status.badge-completed {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-status.badge-upcoming {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+.utopia-alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.utopia-alert-banner.success {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.utopia-input {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  color: #0f172a;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.utopia-input:focus {
+  border-color: #0d1b2a;
+  box-shadow: 0 0 0 2px rgba(13, 27, 42, 0.1);
+}
+
+.payment-method-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.payment-method-card.active {
+  border-color: #0d1b2a;
+  background: #0d1b2a;
+  color: #ffffff;
+}
+
+.quiz-option-btn {
+  text-align: left;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.quiz-option-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.quiz-option-btn.selected {
+  background: #e0f2fe;
+  border-color: #0284c7;
+  color: #0369a1;
+  font-weight: 600;
+}
+
+.notif-item-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.notif-item-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.notif-item-card.unread-card {
+  border-left: 3px solid #0284c7;
+  background: #fafcff;
+}
+
+/* TOPBAR POPOVERS */
+.utopia-topbar-dropdown-wrapper {
+  position: relative;
+}
+
+.utopia-popover-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 330px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  overflow: hidden;
+  animation: modalFadeIn 0.15s ease-out;
+}
+
+.utopia-popover-header {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+
+.utopia-popover-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.utopia-popover-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.12s ease;
+}
+
+.utopia-popover-item:hover {
+  background: #f8fafc;
+}
+
+.utopia-popover-item.unread {
+  background: #f0f9ff;
+}
+
+.utopia-popover-footer {
+  padding: 0.65rem 1rem;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  text-align: center;
+}
+
+.utopia-popover-footer-btn {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.utopia-avatar-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.utopia-profile-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 220px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  overflow: hidden;
+  animation: modalFadeIn 0.15s ease-out;
+}
+
+.utopia-profile-info-header {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: #f8fafc;
+}
+
+.utopia-profile-links {
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+}
+
+.utopia-profile-link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  color: #334155;
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s ease;
+}
+
+.utopia-profile-link-item:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.utopia-profile-link-item.logout {
+  color: #dc2626;
+}
+
+.utopia-profile-link-item.logout:hover {
+  background: #fef2f2;
+}
+
+.quick-search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.12s ease;
+}
+
+.quick-search-result-item:hover {
+  background: #f8fafc;
+}
+
+.quick-search-result-item strong {
+  display: block;
+  font-size: 0.86rem;
+  color: #0f172a;
+}
+
+.quick-search-result-item p {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+/* FLOATING MENTOR HELP BUTTON */
+.utopia-floating-help-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0d1b2a;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 18px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(13, 27, 42, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 99;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.utopia-floating-help-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(13, 27, 42, 0.35);
+  background: #1b2a3d;
+}
+
+/* ============================================================
+   KPI STATS GRID & UNIFIED PORTAL CARD SYSTEM
+   ============================================================ */
+.utopia-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .utopia-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .utopia-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.utopia-stat-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.utopia-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.utopia-stat-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.utopia-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.utopia-stat-value {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.utopia-stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 3px;
+}
+
+/* Unified 4-Column and 3-Column Card Grids */
+.utopia-cards-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+  .utopia-cards-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .utopia-cards-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.utopia-cards-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .utopia-cards-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .utopia-cards-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.utopia-cards-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .utopia-cards-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Universal Aligned Portal Card */
+.utopia-portal-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.utopia-portal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
+}
+
+.utopia-portal-card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.utopia-portal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 8px;
+}
+
+.utopia-portal-card-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.5rem 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  line-height: 1.35;
+}
+
+.utopia-portal-card-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 0.85rem 0;
+  height: 42px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.utopia-portal-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.utopia-portal-card-footer {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+

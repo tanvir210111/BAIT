@@ -47,6 +47,7 @@ export default function Footer() {
             <ul className="footer-links">
               <li><Link to="/amader-somporke" className="footer-link">লক্ষ্য ও ভিশন</Link></li>
               <li><Link to="/course" className="footer-link">কোর্সসমূহ</Link></li>
+              <li><Link to="/services" className="footer-link">আমাদের সেবাসমূহ</Link></li>
               <li><Link to="/instructor" className="footer-link">প্রশিক্ষকমণ্ডলী</Link></li>
               <li><Link to="/refund-policy" className="footer-link">রিফান্ড পলিসি</Link></li>
               <li><Link to="/privacy-policy" className="footer-link">প্রাইভেসী পলিসি</Link></li>
